@@ -1,0 +1,251 @@
+{% extends "otc/base.html" %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="wrap banner"></div>
+
+<!-- level1 -->
+<div class="wrap level1">
+	<div class="left news">
+    	<div class="titlebg">
+        	<span class="title">2014-07-04</span>
+        </div>
+        <div class="content">
+        	<div class="left newblock zh">
+            	<div style="left: 25px; position: absolute; top: 15px;">
+            	<p class="fontsize1">208.14</p>
+                <p class="fontsize2">综合指数</p>
+                </div>
+            </div>
+            <div class="left newblock gm">
+            	<div style="left: 25px; position: absolute; top: 15px;">
+            	<p class="fontsize1">277.27</p>
+                <p class="fontsize2">规模指数</p>
+                </div>
+            </div>
+            <div class="left newblock zx">
+            	<div style="left: 15px; position: absolute; top: 15px;">
+            	<p class="fontsize2">最新市值</p>
+                <p class="fontsize3">221,555.53M</p>
+                </div>
+            </div>
+            <div class="left newblock zgp">
+            	<div style="left: 13px; position: absolute; top: 15px;">
+            	<p class="fontsize2">总挂牌企业数量</p>
+                <p class="fontsize1">1085<span>家</span></p>
+                </div>
+            </div>
+            <div class="left formula"><img src="{% static 'images/formula.png'%}" /></div>
+        </div>
+    </div>
+    
+    <div class="left leftgap composite">
+    	<div class="titlebg"><span class="title">清大成份指数</span></div>
+        <div class="content">
+        	<!--p>反映新三板、天津、齐鲁、上海和重庆场外市场企业市值的总体走势。 基期定为2014年1月1日，基期指数定为100点。 参与综合指数计算（即能够得到市场价值）的企业共1591家，占总挂牌企业88.14%。</p-->
+            <p>反映12个市场企业总值的总体走势。基期定为2013年1月16日（新三板正式挂牌时间）。基期指数为10000点。计算方法为加权平均值。
+                <br>选股依据：选取全国12个场外市场中每个市场的6家公司，共72家公司，按照交易活跃度选择（交易数量、交易比例、日均交易量）</p>
+            <div class="chart">
+            	<img src="{% static 'images/e1.png'%}" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="right hots">
+    	<div class="titlebg"><span class="title">近期热门证券</span></div>
+        <div class="titleline"></div>
+        <div class="content">
+        	<table>
+            	<tr><th></th><th class="tleft">证券简称</th><th class="tright">最新市值</th><th class="tright">总成效额</th></tr>
+                <tr><td>1</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>2</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>3</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>4</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>5</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>6</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>7</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>8</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>9</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>10</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<!-- level2 -->
+<div class="wrap level2">
+	<div class="left otc">
+    	<div class="titlebg">
+        	<span class="title">新三板</span>
+            <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
+        </div>
+        <div class="content">
+        	<ul>
+            	<!--li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
+                {% for news in otc_new_list%}
+                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="left otc">
+        <div class="titlebg">
+            <span class="title">上海股交</span>
+            <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
+        </div>
+        <div class="content">
+            <ul>
+                <!--li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
+                {% for news in otc_new_list%}
+                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="left otc">
+        <div class="titlebg">
+            <span class="title">其他股交</span>
+            <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
+        </div>
+        <div class="content">
+            <ul>
+                <!--li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
+                <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
+                {% for news in otc_new_list%}
+                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!--div class="left scale">
+    	<div class="titlebg">
+        	<span class="title">规模指数</span>
+            <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
+        </div>
+        <div class="content">
+        	<p>以新三板、天津、齐鲁、上海和重庆全部股票为计算范围，反映挂牌企业数量的总体走势。 基期定为2013年1月1日，基期指数定为100点。</p>
+            <div class="chart">
+            	<img src="{% static 'images/e2.png'%}" />
+            </div>
+        </div>
+    </div-->
+</div>
+<div class="clearfix"></div>
+
+<!-- level3 -->
+<div class="wrap level3">
+	<div class="left degree">
+    	<div class="titlebg">
+        	<span class="title">市场容量指数</span>
+        </div>
+        <div class="content">
+        	<!--div class="left num">成效企业数量：688</div>
+            <div class="left sum">累计成效金额：6,203M</div-->
+                <p>以12家场外市场的全部股票为计算范围，反映12个市场挂牌企业数量的总体趋势，基期定位2013年1月16日，基期指数为100点。</p>
+            <div class="left chart">
+            	<img src="{% static 'images/e3.png'%}" />
+            </div>
+        </div>
+    </div>
+    
+    <!--div class="left company">
+    	<div class="titlebg">
+        	<span class="title">场外市场活跃企业</span>
+        </div>
+        <div class="content">
+        	<table>
+            	<tr><th>代码</th><th>名称</th><th>累计成交量</th><th>成交总价</th></tr>
+			</table>
+			<div id="wrapper" style="overflow: hidden; height: 330px; margin-top:20px;">
+			<table id="data">
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+                <tr><td>430183</td><td>天友设计</td><td>185.99M</td><td>1,103.40M</td></tr>
+            </table>
+			<table id="temp" style="margin:0;"></table>
+			</div>
+        </div>
+    </div-->
+</div>
+<div class="clearfix"></div>
+
+<!-- level4 -->
+<div class="wrap level4">
+	<div class="left cover">
+    	<div class="titlebg">
+        	<span class="title">场外市场覆盖图</span>
+        </div>
+        <div class="content">
+        	<input type="button" value="" data="trade" class="trade tradehover" />
+            <input type="button" value="" data="ratio" class="ratio" />
+            <div class="left chart" id="trade">
+            	<!--img src="{% static 'images/e4.png'%}" /-->
+                <div id="industry_column" style="min-width: 590px; height: 296px; margin: 0 auto"></div>
+            </div>
+            <div class="left chart" id="ratio">
+            	<!--img src="{% static 'images/e5.png'%}" /-->
+                <div id="industry_pie" style="min-width: 590px; height: 296px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="left otcreport">
+    	<div class="titlebg">
+        	<span class="title">otc研告</span>
+            <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
+        </div>
+        <div class="content">
+        	<ul>
+            	<li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+{% endblock %}
+

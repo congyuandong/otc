@@ -110,5 +110,12 @@ class otc_hot(models.Model):
 		verbose_name = '近期热门证券'
 		verbose_name_plural = '热门证券'
 
+'''
+基础数据
+成分指数 市场容量指数 最新市值 总挂牌企业数量
+'''
+class otc_base(models.Model):
+	
+	base_date = models.DateField(verbose_name='日期')
 
 

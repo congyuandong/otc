@@ -68,7 +68,7 @@
                 <tr><td>9</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>10</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr-->
                 {% for otc_hot in otc_hot_list%}
-                    <tr><td>{{otc_hot.hot_sort}}</td><td class="tleft">{{otc_hot.hot_company}}</td><td class="tright red">{{otc_hot.hot_trans}}M</td><td class="tright">{{otc_hot.hot_sum_trans}}M</td></tr>
+                    <tr><td>{{otc_hot.hot_sort}}</td><td class="tleft">{{otc_hot.hot_company}}</td><td class="tright red">{{otc_hot.hot_trans}}</td><td class="tright">{{otc_hot.hot_sum_trans}}</td></tr>
                 {% endfor %}
             </table>
         </div>
@@ -234,7 +234,7 @@
     
     <div class="left otcreport">
     	<div class="titlebg">
-        	<span class="title">otc研告</span>
+        	<span class="title">OTC研告</span>
             <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
         </div>
         <div class="content">

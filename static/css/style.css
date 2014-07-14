@@ -61,7 +61,8 @@
 .hots .tright{ padding-right:8px;}
 
 /* level2 */
-.otc{ width:30%; padding-left: 1.5%;padding-right: 1.5%;}
+.otc{ width:32%;}
+.otccenter{width:32%;padding-right: 1.9%;padding-left: 1.9%;}
 .scale{ width:300px; margin-left:20px;}
 .titlebg .right a{ line-height:22px; padding:0 8px; display:inline-block; height:22px; background-color:#647687; color:#fff;}
 .titlebg .right a:hover{ background-color:#2a8ade;}

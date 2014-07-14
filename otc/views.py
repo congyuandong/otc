@@ -8,10 +8,12 @@ import simplejson as json
 from otc.models import industry,otc_new,otc_hot,otc_study
 
 def index(request):
-	otc_new_list = otc_new.objects.all()
+	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='新三板')[:7]
+	otc_new_list_shanghai = otc_new.objects.filter(new_region__reg_name__exact='上海')[:7]
+	otc_new_list_other = otc_new.objects.exclude(new_region__reg_name__exact='上海').exclude(new_region__reg_name__exact='新三板')[:7]
 	otc_hot_list = otc_hot.objects.order_by('-hot_sum_trans')[:10]
 	otc_study_list = otc_study.objects.order_by('stu_date')[:8]
-	context = {'otc_new_list':otc_new_list,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}
+	context = {'otc_new_list_sanban':otc_new_list_sanban,'otc_new_list_shanghai':otc_new_list_shanghai,'otc_new_list_other':otc_new_list_other,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}
 	return render(request,'otc/index.html',context)
 
 def industry_pie(request):

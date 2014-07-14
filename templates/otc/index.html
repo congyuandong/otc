@@ -96,8 +96,8 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_sanban%}
-                    {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                    {% if news.new_title|length > 24 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"22"}}...</a></li>
                     {% else %}
                         <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
                     {% endif %}
@@ -124,8 +124,8 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_shanghai%}
-                    {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                    {% if news.new_title|length > 24 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"22"}}...</a></li>
                     {% else %}
                         <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
                     {% endif %}
@@ -152,8 +152,8 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_other%}
-                    {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                    {% if news.new_title|length > 24 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"22"}}...</a></li>
                     {% else %}
                         <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
                     {% endif %}

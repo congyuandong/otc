@@ -7,31 +7,31 @@
 <div class="wrap level1">
 	<div class="left news">
     	<div class="titlebg">
-        	<span class="title">2014-07-04</span>
+        	<span class="title">{{otc_base_last.base_date}}</span>
         </div>
         <div class="content">
         	<div class="left newblock zh">
             	<div style="left: 25px; position: absolute; top: 15px;">
-            	<p class="fontsize1">208.14</p>
+            	<p class="fontsize1">{{otc_base_last.base_index}}</p>
                 <p class="fontsize2">清大成份指数</p>
                 </div>
             </div>
             <div class="left newblock gm">
             	<div style="left: 25px; position: absolute; top: 15px;">
-            	<p class="fontsize1">277.27</p>
+            	<p class="fontsize1">{{otc_base_last.base_company_index}}</p>
                 <p class="fontsize2">市场容量指数</p>
                 </div>
             </div>
             <div class="left newblock zx">
             	<div style="left: 15px; position: absolute; top: 15px;">
             	<p class="fontsize2">最新市值</p>
-                <p class="fontsize3">221,555.53M</p>
+                <p class="fontsize3">2{{otc_base_last.base_trans}}M</p>
                 </div>
             </div>
             <div class="left newblock zgp">
             	<div style="left: 13px; position: absolute; top: 15px;">
             	<p class="fontsize2">总挂牌企业数量</p>
-                <p class="fontsize1">1085<span>家</span></p>
+                <p class="fontsize1">{{otc_base_last.base_company}}<span>家</span></p>
                 </div>
             </div>
             <div class="left formula"><img src="{% static 'images/formula.png'%}" /></div>

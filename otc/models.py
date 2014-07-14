@@ -115,7 +115,15 @@ class otc_hot(models.Model):
 成分指数 市场容量指数 最新市值 总挂牌企业数量
 '''
 class otc_base(models.Model):
-	
 	base_date = models.DateField(verbose_name='日期')
+	base_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="成分指数")
+	base_company_index =models.DecimalField(max_digits=15,decimal_places=5,verbose_name="市场容量指数")
+	base_trans = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="最新市值")
+	base_company = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="总挂牌企业数量")
+
+	class Meta:
+		verbose_name = "基础数据"
+		verbose_name_plural = "基础数据"
+
 
 

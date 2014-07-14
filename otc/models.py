@@ -75,3 +75,40 @@ class otc_new(models.Model):
 	class Meta:
 		verbose_name = 'OTC公告'
 		verbose_name_plural = 'OTC公告'
+
+'''
+otc研告
+编号  文档名字 URL 市场 公布日期
+'''
+class otc_study(models.Model):
+	stu_code = models.CharField(max_length = 30,verbose_name='编号')
+	stu_title = models.CharField(max_length = 100,verbose_name='标题')
+	stu_url = models.FileField(verbose_name='文件',upload_to='pdf')
+	stu_date = models.DateField(verbose_name='日期')
+
+	def __unicode__(self):
+		return self.stu_title
+
+	class Meta:
+		verbose_name = 'OTC研告'
+		verbose_name_plural = 'OTC研告'
+
+'''
+近期热门证券
+公司名称 最新成交价 累计成交量
+'''
+class otc_hot(models.Model):
+	hot_sort = models.IntegerField(default=0,verbose_name="热度")
+	hot_company = models.CharField(max_length=30,verbose_name="公司简称")
+	hot_trans = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="最新成交价")
+	hot_sum_trans = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="累计成交量")
+
+	def __unicode__(self):
+		return self.hot_company
+
+	class Meta:
+		verbose_name = '近期热门证券'
+		verbose_name_plural = '热门证券'
+
+
+

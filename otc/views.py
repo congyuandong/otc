@@ -5,12 +5,13 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import simplejson as json
 
-from otc.models import industry,otc_new
+from otc.models import industry,otc_new,otc_hot,otc_study
 
 def index(request):
 	otc_new_list = otc_new.objects.all()
-	print otc_new_list
-	context = {'otc_new_list':otc_new_list}
+	otc_hot_list = otc_hot.objects.order_by('hot_sort')
+	otc_study_list = otc_study.objects.order_by('stu_date')
+	context = {'otc_new_list':otc_new_list,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}
 	return render(request,'otc/index.html',context)
 
 def industry_pie(request):

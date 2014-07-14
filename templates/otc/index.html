@@ -13,13 +13,13 @@
         	<div class="left newblock zh">
             	<div style="left: 25px; position: absolute; top: 15px;">
             	<p class="fontsize1">208.14</p>
-                <p class="fontsize2">综合指数</p>
+                <p class="fontsize2">清大成份指数</p>
                 </div>
             </div>
             <div class="left newblock gm">
             	<div style="left: 25px; position: absolute; top: 15px;">
             	<p class="fontsize1">277.27</p>
-                <p class="fontsize2">规模指数</p>
+                <p class="fontsize2">市场容量指数</p>
                 </div>
             </div>
             <div class="left newblock zx">
@@ -42,10 +42,11 @@
     	<div class="titlebg"><span class="title">清大成份指数</span></div>
         <div class="content">
         	<!--p>反映新三板、天津、齐鲁、上海和重庆场外市场企业市值的总体走势。 基期定为2014年1月1日，基期指数定为100点。 参与综合指数计算（即能够得到市场价值）的企业共1591家，占总挂牌企业88.14%。</p-->
-            <p>反映12个市场企业总值的总体走势。基期定为2013年1月16日（新三板正式挂牌时间）。基期指数为10000点。计算方法为加权平均值。
-                <br>选股依据：选取全国12个场外市场中每个市场的6家公司，共72家公司，按照交易活跃度选择（交易数量、交易比例、日均交易量）</p>
+            <p>反映18个市场企业总值的总体走势。基期定为2013年1月16日（新三板正式挂牌时间）。基期指数为10000点。计算方法为加权平均值。
+                <br>选股依据：选取全国18个场外市场中每个市场的6家公司，共72家公司，按照交易活跃度选择（交易数量、交易比例、日均交易量）</p>
             <div class="chart">
-            	<img src="{% static 'images/e1.png'%}" />
+            	<!--img src="{% static 'images/e1.png'%}" /-->
+                <div id="otc_general_line" ></div>
             </div>
         </div>
     </div>
@@ -55,8 +56,8 @@
         <div class="titleline"></div>
         <div class="content">
         	<table>
-            	<tr><th></th><th class="tleft">证券简称</th><th class="tright">最新市值</th><th class="tright">总成效额</th></tr>
-                <tr><td>1</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+            	<tr><th></th><th class="tleft">公司简称</th><th class="tright">最新成交价</th><th class="tright">累计成交量</th></tr>
+                <!--tr><td>1</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>2</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>3</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>4</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
@@ -65,7 +66,10 @@
                 <tr><td>7</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>8</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>9</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
-                <tr><td>10</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
+                <tr><td>10</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr-->
+                {% for otc_hot in otc_hot_list%}
+                    <tr><td>{{otc_hot.hot_sort}}</td><td class="tleft">{{otc_hot.hot_company}}</td><td class="tright red">{{otc_hot.hot_trans}}M</td><td class="tright">{{otc_hot.hot_sum_trans}}M</td></tr>
+                {% endfor %}
             </table>
         </div>
     </div>
@@ -170,9 +174,10 @@
         <div class="content">
         	<!--div class="left num">成效企业数量：688</div>
             <div class="left sum">累计成效金额：6,203M</div-->
-                <p>以12家场外市场的全部股票为计算范围，反映12个市场挂牌企业数量的总体趋势，基期定位2013年1月16日，基期指数为100点。</p>
+                <p>以18家场外市场的全部股票为计算范围，反映18个市场挂牌企业数量的总体趋势，基期定位2013年1月16日，基期指数为100点。</p>
             <div class="left chart">
-            	<img src="{% static 'images/e3.png'%}" />
+            	<!--img src="{% static 'images/e3.png'%}" /-->
+                <div id="industry_line" style="min-width: 960px; height: 296px; margin: 0 auto"></div>
             </div>
         </div>
     </div>
@@ -234,14 +239,17 @@
         </div>
         <div class="content">
         	<ul>
-            	<li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+            	<!--li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
                 <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
-                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li>
+                <li><p>数据场外市场报告</p><p>（2014年4月）</p></li-->
+                {% for otc_study in otc_study_list %}
+                    <li><p><a href="media/{{otc_study.stu_url}}">{{otc_study.stu_title}}</a></p><p>（{{otc_study.stu_date}}）</p></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

@@ -9,8 +9,8 @@ from otc.models import industry,otc_new,otc_hot,otc_study
 
 def index(request):
 	otc_new_list = otc_new.objects.all()
-	otc_hot_list = otc_hot.objects.order_by('hot_sort')
-	otc_study_list = otc_study.objects.order_by('stu_date')
+	otc_hot_list = otc_hot.objects.order_by('hot_sort')[10]
+	otc_study_list = otc_study.objects.order_by('stu_date')[8]
 	context = {'otc_new_list':otc_new_list,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}
 	return render(request,'otc/index.html',context)
 

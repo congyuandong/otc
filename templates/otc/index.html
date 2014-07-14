@@ -96,7 +96,11 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_sanban%}
-                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% if news.new_title|length > 28 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"26"}}...</a></li>
+                    {% else %}
+                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -120,7 +124,11 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_shanghai%}
-                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% if news.new_title|length > 28 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"26"}}...</a></li>
+                    {% else %}
+                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -144,7 +152,11 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li>
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_other%}
-                    <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% if news.new_title|length > 28 %}
+                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"26"}}...</a></li>
+                    {% else %}
+                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>

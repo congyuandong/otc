@@ -25,7 +25,7 @@
             <div class="left newblock zx">
             	<div style="left: 15px; position: absolute; top: 15px;">
             	<p class="fontsize2">最新市值</p>
-                <p class="fontsize3">2{{otc_base_last.base_trans}}M</p>
+                <p class="fontsize3">{{otc_base_last.base_trans}}M</p>
                 </div>
             </div>
             <div class="left newblock zgp">
@@ -42,7 +42,7 @@
     	<div class="titlebg"><span class="title">中国场外指数</span></div>
         <div class="content">
         	<!--p>反映新三板、天津、齐鲁、上海和重庆场外市场企业市值的总体走势。 基期定为2014年1月1日，基期指数定为100点。 参与综合指数计算（即能够得到市场价值）的企业共1591家，占总挂牌企业88.14%。</p-->
-            <p>反映18个市场企业总值的总体走势。基期定为2013年1月16日（新三板正式挂牌时间）。基期指数为10000点。计算方法为加权平均值。
+            <p>反映18个市场企业总值的总体走势。基期定为2014年1月1日。基期指数为10000点。计算方法为加权平均值。
                 <br>选股依据：选取全国18个场外市场中共72家公司，按照交易活跃度选择（交易数量、交易比例、日均交易量）</p>
             <div class="chart">
             	<!--img src="{% static 'images/e1.png'%}" /-->
@@ -80,7 +80,7 @@
 <div class="wrap level2">
 	<div class="left otc">
     	<div class="titlebg">
-        	<span class="title">新三板</span>
+        	<span class="title">中小股转</span>
             <span class="right"><a href="javascript:;">更多&gt;&gt;</a></span>
         </div>
         <div class="content">
@@ -97,9 +97,9 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_sanban%}
                     {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title|slice:"24"}}...</a></li>
                     {% else %}
-                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title}}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -125,9 +125,9 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_shanghai%}
                     {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title|slice:"24"}}...</a></li>
                     {% else %}
-                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title}}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -153,9 +153,9 @@
                 <li><a href="javascript:;">普华科技：2013年度权益分派实施公告（更新后）</a></li-->
                 {% for news in otc_new_list_other%}
                     {% if news.new_title|length > 26 %}
-                        <li><a href="{{news.new_url}}">{{news.new_title|slice:"24"}}...</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title|slice:"24"}}...</a></li>
                     {% else %}
-                        <li><a href="{{news.new_url}}">{{news.new_title}}</a></li>
+                        <li><a href="{{news.new_url}}" target="_blank">{{news.new_title}}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

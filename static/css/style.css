@@ -11,7 +11,7 @@
 .clearfix{ clear:both; height:20px;}
 .btn{ background-color:#2a8ade; border:1px solid #1771d2; border-radius:5px; cursor:pointer;}
 .btn:hover,.hoverbtn{ background-color:#ff8c19; border:1px solid #dd6f00;}
-.wrap{ width:1100px; margin:0 auto;}
+.wrap{ width:1000px; margin:0 auto;}
 .titlebg{ background:url(../images/title_bg.png) right bottom repeat-x; }
 .titlebg .title{ padding-right:10px; line-height:22px; background:#FFF;font-size:28px; color:#000; font-family:'Microsoft YaHei'; font-weight:500;}
 
@@ -25,7 +25,7 @@
 .header .navibar li{ float:left;border-left:1px solid #47a4f5; border-right:1px solid #0c62ad;}
 .header .navibar li:first-child{ border-left:none;}
 .header .navibar li:last-child{ border-right:none;}
-.header .navibar li a{ color:#fff; font-weight:200; font-size:14px; height:50px; display:inline-block; padding:0 11.9px;}
+.header .navibar li a{ color:#fff; font-weight:200; font-size:14px; height:50px; display:inline-block; padding:0 9px;}
 .header .navibar li a:hover{ background-color:#379945;}
 
 /* banner */	

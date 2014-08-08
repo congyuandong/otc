@@ -8,7 +8,7 @@ import simplejson as json
 from otc.models import industry,otc_new,otc_hot,otc_study,otc_base
 
 def index(request):
-	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='中小股转')[:7]
+	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
 	otc_new_list_shanghai = otc_new.objects.filter(new_region__reg_name__exact='上海')[:7]
 	otc_new_list_other = otc_new.objects.exclude(new_region__reg_name__exact='上海').exclude(new_region__reg_name__exact='中小股转')[:7]
 	otc_hot_list = otc_hot.objects.order_by('-hot_sum_trans')[:10]

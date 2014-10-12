@@ -1,0 +1,1 @@
+依赖simplejson pyqt4

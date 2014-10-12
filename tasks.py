@@ -31,7 +31,7 @@ def dump_otc_news():
 
 def runTasks():
 	sync_otc_base()
-	dump_otc_news()
+	#dump_otc_news()
 	schedule()
 
 def schedule():

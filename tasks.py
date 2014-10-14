@@ -75,9 +75,9 @@ def anaIndustryIndex():
 
 
 def runTasks():
-	#dump_otc_news()
+	dump_otc_news()
 	anaIndustryIndex()
-	#sync_otc_base()
+	sync_otc_base()
 	schedule()
 
 def schedule():

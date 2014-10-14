@@ -72,9 +72,8 @@ class OTC(models.Model):
 '''
 class industry(models.Model):
 	in_region = models.ForeignKey(region,verbose_name='市场')
-	in_date = models.DateField(verbose_name="日期")
+	in_date = models.DateField(verbose_name="更新日期")
 	in_num = models.IntegerField(default=0,verbose_name='挂牌企业数量')
-
 
 	#def __unicode__(self):
 	#	return self.in_num
@@ -83,6 +82,17 @@ class industry(models.Model):
 		verbose_name = '市场容量'
 		verbose_name_plural = '市场容量'
 
+'''
+市场容量指数
+'''
+class industry_index(models.Model):
+	ii_date = models.DateField(verbose_name="日期")
+	ii_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='指数')
+	ii_company = models.IntegerField(verbose_name='公司数量')
+
+	class Meta:
+		verbose_name = '市场容量指数'
+		verbose_name_plural = '市场容量指数'
 
 '''
 otc公告

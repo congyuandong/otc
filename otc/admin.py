@@ -1,6 +1,6 @@
 #coding:utf-8
 from django.contrib import admin
-from otc.models import OTC,industry,region,otc_new,otc_hot,otc_study,otc_base
+from otc.models import OTC,industry,region,otc_new,otc_hot,otc_study,otc_base,industry_index
 
 class IndustryAdmin(admin.ModelAdmin):
 	fields = ['in_region','in_date','in_num']
@@ -28,6 +28,9 @@ class OTCBaseAdmin(admin.ModelAdmin):
 	fields = ['base_date','base_index','base_company_index','base_trans','base_company']
 	list_display = ['base_date','base_index','base_company_index','base_trans','base_company']
 
+class IndustryIndexAdmin(admin.ModelAdmin):
+	list_display = ['ii_date','ii_index','ii_company']
+
 # Register your models here.
 admin.site.register(industry,IndustryAdmin)
 admin.site.register(region)
@@ -35,3 +38,4 @@ admin.site.register(otc_new,OTCNewAdmin)
 admin.site.register(otc_hot,OTCHotAdmin)
 admin.site.register(otc_study,OTCStudyAdmin)
 admin.site.register(otc_base,OTCBaseAdmin)
+admin.site.register(industry_index,IndustryIndexAdmin)

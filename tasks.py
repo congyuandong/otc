@@ -7,7 +7,7 @@ from tasks.dumpnews import *
 os.environ['DJANGO_SETTINGS_MODULE'] ='scrapy.settings'
 from django.conf import settings
 #from django.contrib.auth.models import User, check_password
-from otc.models import otc_base,otc_new,region
+from otc.models import otc_base,otc_new,region,industry,industry_index
 
 
 def sync_otc_base():
@@ -50,9 +50,34 @@ def dump_otc_news():
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
 
+#计算市场容量指数
+def anaIndustryIndex():
+	#假定2013年1月16日公司总数为651家
+	base_comp = 651.0
+	tot_comp = 0.0
+
+	industry_objs = industry.objects.all()
+	for industry_obj in industry_objs:
+		tot_comp += industry_obj.in_num
+	#计算指数
+	index = round(tot_comp/base_comp*100,2)
+	
+	ii_objs = industry_index.objects.filter(ii_date=date.today())
+	if ii_objs:
+		ii_objs[0].ii_index = index
+		ii_objs[0].ii_company = tot_comp
+		ii_objs[0].save()
+		print '更新市场指数'
+	else:
+		ii_obj_new = industry_index(ii_date=date.today(),ii_index=index,ii_company=tot_comp)
+		ii_obj_new.save()
+		print '插入市场指数'
+
+
 def runTasks():
-	sync_otc_base()
-	dump_otc_news()
+	#dump_otc_news()
+	anaIndustryIndex()
+	#sync_otc_base()
 	schedule()
 
 def schedule():

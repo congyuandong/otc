@@ -67,17 +67,33 @@ def anaIndustryIndex():
 		ii_objs[0].ii_index = str(index)
 		ii_objs[0].ii_company = tot_comp
 		ii_objs[0].save()
+
+		otc_base_last = otc_base.objects.order_by('base_date')
+		if otc_base_last:
+			otc_base_last[0].base_company_index = str(index)
+			otc_base_last[0].base_company = tot_comp
+			otc_base_last[0].base_date = date.today()
+			otc_base_last[0].save()
+
 		print '更新市场指数'
 	else:
 		ii_obj_new = industry_index(ii_date=date.today(),ii_index=str(index),ii_company=tot_comp)
 		ii_obj_new.save()
+
+		otc_base_last = otc_base.objects.order_by('base_date')
+		if otc_base_last:
+			otc_base_last[0].base_company_index = str(index)
+			otc_base_last[0].base_company = tot_comp
+			otc_base_last[0].base_date = date.today()
+			otc_base_last[0].save()
+
 		print '插入市场指数'
 
 
 def runTasks():
 	dump_otc_news()
 	anaIndustryIndex()
-	sync_otc_base()
+	#sync_otc_base()
 	schedule()
 
 def schedule():

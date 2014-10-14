@@ -1,40 +1,89 @@
 #coding:utf-8
 import sys,urllib2
-from HTMLParser import HTMLParser
 
 import urllib
 from unGzip import ContentEncodingProcessor
 from bs4 import BeautifulSoup
-import re
-import os
-import time
+import simplejson as json
+import ast,time
 
-def dumpZXGZ(): 
-  os.system('python tasks/dumpHtml.py')
-  a=open('test.html','r')
-  html_doc=a.read()
+IOSTIMEFORMAT = '%Y-%m-%d'
+nowDay = time.strftime(IOSTIMEFORMAT,time.gmtime(time.time()))
+
+encoding_support = ContentEncodingProcessor()
+
+
+#抓取中小股转
+#主URL http://www.neeq.cc/disclosure
+#最新公告URL http://bjzr.gfzr.com.cn/bjzr/zxggnew.js
+def dumpZXGZ():
+  result = []
+  url = 'http://bjzr.gfzr.com.cn/bjzr/zxggnew.js'
+  news = urllib2.urlopen(url).read().decode('gbk').encode('utf8')
+  news = news[17:len(news)-1]
+  #print json.dumps(result)
+  news = ast.literal_eval(news)
+  for new in news:
+    if new[5] ==  nowDay and new[3] == 'PDF':
+      #print new[0],'http://bjzr.gfzr.com.cn/'+new[1],new[2]
+      result.append([new[0],'http://bjzr.gfzr.com.cn/'+new[1],new[2],new[5]])
+  return result
+
+#抓取上海股权
+#主要URL http://www.china-see.com
+#抓取URL http://www.china-see.com/my_xxpl.jsp?cid=148&fid=135
+def dumpSHGQ():
+  result = []
+  url = 'http://www.china-see.com/my_xxpl.jsp?cid=148&fid=135'
+  topUrl = 'http://www.china-see.com'
+  opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+  html_doc = opener.open(url).read().decode('gb2312').encode('utf8')
   soup = BeautifulSoup(html_doc)
-  #page_num = soup.find_all(text=re.compile("(\d+)\/(\d+)"))[0]
-  #print page_num
-  table = soup.find(id='afficheDiv')
-  #print table
 
+  table = soup.find('table',width="706")
   trs = table.find_all('tr')
-  res = []
+  trs = trs[5:-4]
   for tr in trs:
-    tds = tr.find_all('td')
-    #print tds[0].text
-    tag_a = tds[1].find('a')
-    #print tag_a.text.replace(' ','').encode('utf-8')
-    #print tag_a.get('href')
-    #print tds[2].text
-    res.append([tds[0].text,tag_a.text.replace(' ','').encode('utf-8'),tag_a.get('href'),tds[2].text])
+    td = tr.find('td',background="myimages/xxpl_r19_c11.jpg")
+    #print td
+    if td is not None:
+      table = td.find('table')
+      tds = table.find('tr').find_all('td')
+      #根据时间进行筛选
+      #if tds[1].find('div').string == nowDay:
+      title = tds[0].find('a').string
+      title = title.split(' ')
+      result.append([title[0],topUrl+tds[0].find('a').get('href')[2:],title[1].encode('utf8'),tds[1].find('div').string])
+  return result
 
-  if os.path.isfile('test.html'):
-    os.remove('test.html')
+#抓取天津股权
+#主要URL http://www.tjsoc.com
+#抓取URL http://www.tjsoc.com/web/infor.aspx?cid=3
+def dumpTJGQ():
+  result = []
+  url = 'http://www.tjsoc.com/web/infor.aspx?cid=3'
+  subUrl = 'http://www.tjsoc.com/web/'
+  opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+  html_doc = opener.open(url).read()
+  soup = BeautifulSoup(html_doc)
 
-  #print res
-  return res
+  ul = soup.find('ul',"newslist")
+  lis = ul.find_all('li')
+  for li in lis:
+    #print li
+    #print subUrl+li.find('a').get('href').encode('utf8')
+    #print li.find('a').string.encode('utf8').strip()
+    #print li.find('span').string
+    result.append(['',subUrl+li.find('a').get('href').encode('utf8'),li.find('a').string.encode('utf8').strip(),li.find('span').string])
+  return result
+
+
+
+#抓取新闻
+def dumpNews():
+  #dumpZXGZ()
+  #dumpSHGQ()
+  dumpTJGQ()
 
 if __name__ == '__main__':
-  dumpZXGZ()
+  dumpNews()

@@ -3,7 +3,7 @@ import	sys,os
 from datetime import *
 from threading import Timer
 import time
-from tasks.dumpnews import dumpZXGZ
+from tasks.dumpnews import *
 os.environ['DJANGO_SETTINGS_MODULE'] ='scrapy.settings'
 from django.conf import settings
 #from django.contrib.auth.models import User, check_password
@@ -18,20 +18,41 @@ def sync_otc_base():
 	otc_base_item.save()
 
 #抓取新闻 包括中小股转，上海股交，其他股交
+#code title url 日期
 def dump_otc_news():
-	zxgz = dumpZXGZ()
-	for new in zxgz:
-		found = otc_new.objects.filter(new_code=new[0],new_title=new[1],new_url=new[2],new_date=new[3])
+	zxgzNews = dumpZXGZ()
+	for new in zxgzNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[1],new_url=new[2],new_date=new[3])
+			n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
-			print '存储数据',new[0],new[1],new[2],new[3]
+			print '存储数据',new[0],new[1],new[2]
 		else:
-			print '已经存在数据',new[0],new[1],new[2],new[3]
+			print '已经存在数据',new[0],new[1],new[2]
+
+	shgqNews = dumpSHGQ()
+	for new in shgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n = otc_new(new_region=region.objects.get(reg_name='上海'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
+
+	tjgqNews = dumpTJGQ()
+	for new in tjgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n = otc_new(new_region=region.objects.get(reg_name='天津'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
 
 def runTasks():
 	sync_otc_base()
-	#dump_otc_news()
+	dump_otc_news()
 	schedule()
 
 def schedule():

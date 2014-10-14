@@ -64,12 +64,12 @@ def anaIndustryIndex():
 	
 	ii_objs = industry_index.objects.filter(ii_date=date.today())
 	if ii_objs:
-		ii_objs[0].ii_index = index
+		ii_objs[0].ii_index = str(index)
 		ii_objs[0].ii_company = tot_comp
 		ii_objs[0].save()
 		print '更新市场指数'
 	else:
-		ii_obj_new = industry_index(ii_date=date.today(),ii_index=index,ii_company=tot_comp)
+		ii_obj_new = industry_index(ii_date=date.today(),ii_index=str(index),ii_company=tot_comp)
 		ii_obj_new.save()
 		print '插入市场指数'
 

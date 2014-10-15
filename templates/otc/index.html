@@ -68,7 +68,7 @@
                 <tr><td>9</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr>
                 <tr><td>10</td><td class="tleft">中海阳</td><td class="tright red">1,103.40M</td><td class="tright">185.99M</td></tr-->
                 {% for otc_hot in otc_hot_list%}
-                    <tr><td>{{forloop.counter}}</td><td class="tleft">{{otc_hot.hot_company}}</td><td class="tright red">{{otc_hot.hot_trans}}</td><td class="tright">{{otc_hot.hot_sum_trans}}</td></tr>
+                    <tr><td>{{forloop.counter}}</td><td class="tleft">{{otc_hot.otc_name}}</td><td class="tright red">{{otc_hot.hot_trans}}</td><td class="tright">{{otc_hot.otc_amount | floatformat:"0"}}</td></tr>
                 {% endfor %}
             </table>
         </div>

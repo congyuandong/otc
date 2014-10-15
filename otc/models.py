@@ -155,7 +155,7 @@ class otc_base(models.Model):
 	base_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="成分指数")
 	base_company_index =models.DecimalField(max_digits=15,decimal_places=5,verbose_name="市场容量指数")
 	base_trans = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="最新市值")
-	base_company = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="总挂牌企业数量")
+	base_company = models.IntegerField(verbose_name="总挂牌企业数量")
 
 	class Meta:
 		verbose_name = "基础数据"

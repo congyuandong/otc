@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import simplejson as json
 
-from otc.models import industry,otc_new,otc_hot,otc_study,otc_base,OTC
+from otc.models import industry,otc_new,otc_hot,otc_study,otc_base,OTC,industry_index
 
 def index(request):
 	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
@@ -47,3 +47,27 @@ def industry_column(request):
 		#print per_ind
 		response_data.append(per_ind)
 	return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+#市场容量指数图表
+def industry_line_chart(request):
+	
+	response = {}
+	scale_counts = {}
+	scale_y = []
+	scale_dates = []
+	industry_index_objs = industry_index.objects.order_by('ii_date')
+
+	for industry_index_obj in industry_index_objs:
+		scale_y.append(float(industry_index_obj.ii_index))
+		scale_dates.append((industry_index_obj.ii_date).strftime('%Y-%m-%d'))
+		scale_counts[(industry_index_obj.ii_date).strftime('%Y-%m-%d')] = industry_index_obj.ii_company
+
+	#print scale_y
+	response['scale_counts'] = scale_counts
+	response['scale_y'] = scale_y
+	response['scale_dates'] = scale_dates
+	response['scale_min_y'] = scale_y[0]
+	response['scale_max_y'] = scale_y[-1]
+
+	return HttpResponse(json.dumps(response),content_type="application/json")
+

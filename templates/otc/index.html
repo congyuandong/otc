@@ -12,20 +12,20 @@
         <div class="content">
         	<div class="left newblock zh">
             	<div style="left: 25px; position: absolute; top: 15px;">
-            	<p class="fontsize1">{{otc_base_last.base_index}}</p>
+            	<p class="fontsize1">{{otc_base_last.base_index | floatformat:"2" }}</p>
                 <p class="fontsize2">中国场外指数</p>
                 </div>
             </div>
             <div class="left newblock gm">
             	<div style="left: 25px; position: absolute; top: 15px;">
-            	<p class="fontsize1">{{otc_base_last.base_company_index}}</p>
+            	<p class="fontsize1">{{otc_base_last.base_company_index | floatformat:"2"}}</p>
                 <p class="fontsize2">市场容量指数</p>
                 </div>
             </div>
             <div class="left newblock zx">
             	<div style="left: 15px; position: absolute; top: 15px;">
             	<p class="fontsize2">最新市值</p>
-                <p class="fontsize3">{{otc_base_last.base_trans}}M</p>
+                <p class="fontsize3">{{otc_base_last.base_trans | floatformat:"2"}}M</p>
                 </div>
             </div>
             <div class="left newblock zgp">

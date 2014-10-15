@@ -58,7 +58,7 @@ class OTC(models.Model):
 	otc_name = models.CharField(max_length=100,verbose_name='名称')
 	otc_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总成交数量(股)')
 	otc_per = models.DecimalField(max_digits=10,decimal_places=5,verbose_name='交易比例')
-	otc_amount_per = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='日均交数量(股)')
+	otc_amount_per = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='日均交易量(股)')
 	otc_days = models.IntegerField(verbose_name='已挂牌天数',default=0)
 	otc_date = models.DateField(verbose_name='挂牌日期')
 	otc_tot_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总股本(股)')

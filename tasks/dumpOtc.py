@@ -108,7 +108,7 @@ def neeq():
 
 def dumpotc():
 	neeq()
-	china_see()
+	#china_see()
 	return data_dict
 
 if __name__ == "__main__":

@@ -62,9 +62,25 @@ class OTC(models.Model):
 	otc_days = models.IntegerField(verbose_name='已挂牌天数',default=0)
 	otc_date = models.DateField(verbose_name='挂牌日期')
 	otc_tot_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总股本(股)')
+	otc_last_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格',default=0)
+	otc_tot_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总市值(M)',default=0)
 
+'''
+72家公司的指数
+'''
+class otc_index(models.Model):
+	oi_date = models.DateField(verbose_name="日期")
+	oi_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='指数')
+	oi_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新市值')
 
-
+'''
+72家公司每天的成交数据
+'''
+class otc_deal(models.Model):
+	od_OTC = models.ForeignKey(OTC,verbose_name='公司名称')
+	od_date = models.DateField(verbose_name="日期")
+	od_volume = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='交易量(股)')
+	od_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格')
 
 '''
 行业方向

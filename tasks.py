@@ -105,34 +105,34 @@ def dump_otc():
 			od_date = datetime.strptime(otcs[OTC_obj.otc_code]['date'], "%Y%m%d")
 			otc_deal_objs = otc_deal.objects.filter(od_OTC = OTC_obj,od_date = od_date)
 			if not otc_deal_objs:
-				otc_deal_new = otc_deal(od_OTC = OTC_obj,od_date = od_date,od_volume = otcs[OTC_obj.otc_code]['volume'],od_price = otcs[OTC_obj.otc_code]['latest_price'])
+				otc_deal_new = otc_deal(od_OTC = OTC_obj,od_date = od_date,od_volume = str(otcs[OTC_obj.otc_code]['volume']),od_price = str(otcs[OTC_obj.otc_code]['latest_price']))
 				otc_deal_new.save()
 
-				OTC_obj.otc_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])/OTC_obj.otc_tot_amount
-				OTC_obj.otc_amount_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])/(OTC_obj.otc_days+1)
+				OTC_obj.otc_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/float(OTC_obj.otc_tot_amount))
+				OTC_obj.otc_amount_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/(OTC_obj.otc_days+1))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(TC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])
+					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(TC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume'])))
 				OTC_obj.otc_days += 1
-				OTC_obj.otc_amount += otcs[OTC_obj.otc_code]['volume']
+				OTC_obj.otc_amount = str(float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
+					OTC_obj.otc_last_price = str(otcs[OTC_obj.otc_code]['latest_price'])
 				OTC_obj.save()
 
 				print '增加市场容量'
 			else:
 				
-				OTC_obj.otc_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)/OTC_obj.otc_tot_amount
-				OTC_obj.otc_amount_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)/OTC_obj.otc_days
+				OTC_obj.otc_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))/float(OTC_obj.otc_tot_amount))
+				OTC_obj.otc_amount_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))/OTC_obj.otc_days)
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)
-				OTC_obj.otc_amount = OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume
+					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume)))
+				OTC_obj.otc_amount = str(float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
+					OTC_obj.otc_last_price = str(otcs[OTC_obj.otc_code]['latest_price'])
 				OTC_obj.save()
 				
-				otc_deal_objs[0].od_volume = otcs[OTC_obj.otc_code]['volume']
+				otc_deal_objs[0].od_volume = str(otcs[OTC_obj.otc_code]['volume'])
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					otc_deal_objs[0].od_price = otcs[OTC_obj.otc_code]['latest_price']
+					otc_deal_objs[0].od_price = str(otcs[OTC_obj.otc_code]['latest_price'])
 				otc_deal_objs[0].save()
 
 				print '更新市场容量'

@@ -64,7 +64,7 @@ def china_see_new():
 def china_see():
 	global data_dict
 	for url in chinaSee_url:
-		full_Url = "http://www.china-see.com/hqsj-9.jsp?rightType=9&cid=&fid=&gqdm={}".format(url)
+		full_Url = "http://www.china-see.com/hqsj-9.jsp?rightType=9&cid=&fid=&gqdm="+url
 		req = urllib2.Request(full_Url)
 		resp = urllib2.urlopen(req)
 		respHtml = resp.read()
@@ -95,7 +95,7 @@ def neeq():
 
 	# 新三版 协议 日期+今日最近成交价
 	for url in neeq_url_2:
-		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm={}".format(url)
+		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm="+url
 
 		remoteData_dict = remoteData(full_url)
 
@@ -109,7 +109,7 @@ def neeq():
 
 	# 新三版 协议 今日成交量
 	for url in neeq_url_2:
-		full_url = "http://www.neeq.cc/ajax/QTXieYi?zqdm={}".format(url)
+		full_url = "http://www.neeq.cc/ajax/QTXieYi?zqdm="+url
 
 		remoteData_dict = remoteData(full_url)
 
@@ -121,7 +121,7 @@ def neeq():
 
 	#新三版 做市 日期+今日最近成交价+今日成交量
 	for url in neeq_url_3:
-		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm={}".format(url)
+		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm="+url
 
 		remoteData_dict = remoteData(full_url)
 

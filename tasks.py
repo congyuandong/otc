@@ -111,7 +111,7 @@ def dump_otc():
 				OTC_obj.otc_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/float(OTC_obj.otc_tot_amount))
 				OTC_obj.otc_amount_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/(OTC_obj.otc_days+1))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(TC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume'])))
+					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume'])))
 				OTC_obj.otc_days += 1
 				OTC_obj.otc_amount = str(float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:

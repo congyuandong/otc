@@ -108,10 +108,12 @@ def dump_otc():
 
 				OTC_obj.otc_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])/OTC_obj.otc_tot_amount
 				OTC_obj.otc_amount_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])/(OTC_obj.otc_days+1)
-				OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(TC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])
+				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
+					OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(TC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'])
 				OTC_obj.otc_days += 1
 				OTC_obj.otc_amount += otcs[OTC_obj.otc_code]['volume']
-				OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
+				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
+					OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
 				OTC_obj.save()
 
 				print '增加市场容量'
@@ -119,13 +121,16 @@ def dump_otc():
 				
 				OTC_obj.otc_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)/OTC_obj.otc_tot_amount
 				OTC_obj.otc_amount_per = (OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)/OTC_obj.otc_days
-				OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)
+				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
+					OTC_obj.otc_tot_price = otcs[OTC_obj.otc_code]['latest_price'] * float(OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume)
 				OTC_obj.otc_amount = OTC_obj.otc_amount + otcs[OTC_obj.otc_code]['volume'] - otc_deal_objs[0].od_volume
-				OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
+				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
+					OTC_obj.otc_last_price = otcs[OTC_obj.otc_code]['latest_price']
 				OTC_obj.save()
 				
 				otc_deal_objs[0].od_volume = otcs[OTC_obj.otc_code]['volume']
-				otc_deal_objs[0].od_price = otcs[OTC_obj.otc_code]['latest_price']
+				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
+					otc_deal_objs[0].od_price = otcs[OTC_obj.otc_code]['latest_price']
 				otc_deal_objs[0].save()
 
 				print '更新市场容量'

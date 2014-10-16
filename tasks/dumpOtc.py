@@ -27,11 +27,38 @@ data_dict  =
 import urllib2
 import json
 from bs4 import BeautifulSoup
+import time
 
 chinaSee_url = ["100053", "100028", "100048", "100015", "100055", "100018", "100009", "100042", "100017", "100032", "100049", "100037", "100005", "100003", "100031", "100007", "100021", "100076", "100012", "100063", "100052", "100038", "100066", "100045", "100026", "100025", "100156", "100035"]
 neeq_url_2 = ["430002", "430663", "430097", "430073", "430493", "430542", "430022", "430081", "430145", "831039", "430036", "430132", "430506", "830798", "430396", "830859", "430141", "430060", "430746", "430254", "831020", "430164", "430570", "430095", "430696", "430044", "430040", "430207", "430723", "430602", "430099", "830802", "430306", "430372"]
 neeq_url_3 = ["430357", "430263", "430225", "430130", "430243", "430515", "830818", "430505", "830879", "830983"]
 data_dict = {}
+
+def china_see_new():
+	global data_dict
+	chinaSeeNew_url = 'http://www.china-see.com/dealInfo.do'
+	now = time.strftime('%Y%m%d', time.localtime())
+	# print now
+	for url in chinaSee_url:
+		data_dict[url] = {
+			'date' : now,
+			'latest_price' : 0.0,
+			'volume' : 0
+		}
+	req = urllib2.Request(chinaSeeNew_url)
+	resp = urllib2.urlopen(req)
+	respHtml = resp.read()
+	soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+	# print soup
+	s = soup.find_all('tr')[2:]
+	# print s
+	# li = s.text.encode('utf-8')
+	for l in s:
+		li = l.text.encode('utf-8').split('\n')
+		# print li[1]
+		if li[1] in data_dict.keys():
+			data_dict[li[1]]['latest_price'] = li[4]
+			data_dict[li[1]]['volume'] = li[9]
 
 # 上海 日期+今日最近成交价+今日成交量
 def china_see():
@@ -108,7 +135,8 @@ def neeq():
 
 def dumpotc():
 	neeq()
-	#china_see()
+	china_see()
+	#china_see_new()
 	return data_dict
 
 if __name__ == "__main__":

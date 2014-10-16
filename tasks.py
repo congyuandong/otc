@@ -31,6 +31,7 @@ def dump_otc_news():
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
 
+	'''
 	shgqNews = dumpSHGQ()
 	for new in shgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -40,6 +41,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
+	'''
 
 	tjgqNews = dumpTJGQ()
 	for new in tjgqNews:

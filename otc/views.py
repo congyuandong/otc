@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import simplejson as json
 
-from otc.models import industry,otc_new,otc_hot,otc_study,otc_base,OTC,industry_index
+from otc.models import industry,otc_new,otc_hot,otc_study,otc_base,OTC,industry_index,otc_index
 
 def index(request):
 	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
@@ -68,6 +68,28 @@ def industry_line_chart(request):
 	response['scale_dates'] = scale_dates
 	response['scale_min_y'] = scale_y[0]
 	response['scale_max_y'] = scale_y[-1]
+
+	return HttpResponse(json.dumps(response),content_type="application/json")
+
+def otc_general_line_chart(request):
+	response = {}
+
+	general_dates = []
+	general_y = []
+	general_caps = {}
+
+	otc_index_objs = otc_index.objects.order_by('oi_date')
+
+	for otc_index_obj in otc_index_objs:
+		general_y.append(float(otc_index_obj.oi_index))
+		general_dates.append((otc_index_obj.oi_date).strftime('%Y-%m-%d'))
+		general_caps[(otc_index_obj.oi_date).strftime('%Y-%m-%d')] = otc_index_obj.oi_amount
+
+	response['general_dates'] = general_dates
+	response['general_y'] = general_y
+	response['general_caps'] = general_caps
+	response['general_min_y'] = general_y[0]
+	response['general_max_y'] = general_y[-1]
 
 	return HttpResponse(json.dumps(response),content_type="application/json")
 

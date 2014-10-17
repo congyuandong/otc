@@ -12,7 +12,13 @@ def index(request):
 	otc_new_list_shanghai = otc_new.objects.filter(new_region__reg_name__exact='上海').order_by('-id')[:7]
 	otc_new_list_other = otc_new.objects.exclude(new_region__reg_name__exact='上海').exclude(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
 	#otc_hot_list = otc_hot.objects.order_by('-hot_sum_trans')[:10]
-	otc_hot_list = OTC.objects.order_by('-otc_amount')[:10]
+	otc_hot_objs = OTC.objects.order_by('-otc_amount')
+	otc_hot_list = []
+	for otc_hot_obj in otc_hot_objs:
+		if otc_hot_obj.otc_last_price !=0:
+			otc_hot_list.append(otc_hot_obj)
+	otc_hot_list = otc_hot_list[:10]
+
 	otc_study_list = otc_study.objects.order_by('stu_date')[:8]
 	otc_base_last = otc_base.objects.order_by('base_date')[:1]
 	context = {'otc_base_last':otc_base_last[0],'otc_new_list_sanban':otc_new_list_sanban,'otc_new_list_shanghai':otc_new_list_shanghai,'otc_new_list_other':otc_new_list_other,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}

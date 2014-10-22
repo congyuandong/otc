@@ -50,6 +50,48 @@ def dump_otc_news():
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
 
+	qlgqNews = dumpQLGQ()
+	for new in qlgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n = otc_new(new_region=region.objects.get(reg_name='齐鲁'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
+
+	cqgqNews = dumpCQGQ()
+	for new in cqgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n = otc_new(new_region=region.objects.get(reg_name='重庆'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
+
+	zjgqNews = dumpZJGQ()
+	for new in zjgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n=otc_new(new_region=region.objects.get(reg_name='浙江'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
+
+	gzgqNews = dumpGZGQ()
+	for new in gzgqNews:
+		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+		if not found:
+			n = otc_new(new_region=region.objects.get(reg_name='广州'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+			n.save()
+			print '存储数据',new[0],new[1],new[2]
+		else:
+			print '已经存在数据',new[0],new[1],new[2]
+
+
+
 #计算市场容量指数
 def anaIndustryIndex():
 	#假定2013年1月16日公司总数为651家

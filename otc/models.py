@@ -65,6 +65,9 @@ class OTC(models.Model):
 	otc_last_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格',default=0)
 	otc_tot_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总市值(M)',default=0)
 
+	def __unicode__(self):
+		return self.otc_name
+
 '''
 72家公司的指数
 '''

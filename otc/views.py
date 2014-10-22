@@ -5,13 +5,20 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import simplejson as json
 
-from otc.models import industry,otc_new,otc_hot,otc_study,otc_base
+from otc.models import industry,otc_new,otc_hot,otc_study,otc_base,OTC,industry_index,otc_index
 
 def index(request):
 	otc_new_list_sanban = otc_new.objects.filter(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
 	otc_new_list_shanghai = otc_new.objects.filter(new_region__reg_name__exact='上海').order_by('-id')[:7]
 	otc_new_list_other = otc_new.objects.exclude(new_region__reg_name__exact='上海').exclude(new_region__reg_name__exact='中小股转').order_by('-id')[:7]
-	otc_hot_list = otc_hot.objects.order_by('-hot_sum_trans')[:10]
+	#otc_hot_list = otc_hot.objects.order_by('-hot_sum_trans')[:10]
+	otc_hot_objs = OTC.objects.order_by('-otc_amount')
+	otc_hot_list = []
+	for otc_hot_obj in otc_hot_objs:
+		if otc_hot_obj.otc_last_price !=0:
+			otc_hot_list.append(otc_hot_obj)
+	otc_hot_list = otc_hot_list[:10]
+
 	otc_study_list = otc_study.objects.order_by('stu_date')[:8]
 	otc_base_last = otc_base.objects.order_by('base_date')[:1]
 	context = {'otc_base_last':otc_base_last[0],'otc_new_list_sanban':otc_new_list_sanban,'otc_new_list_shanghai':otc_new_list_shanghai,'otc_new_list_other':otc_new_list_other,'otc_hot_list':otc_hot_list,'otc_study_list':otc_study_list}
@@ -46,3 +53,49 @@ def industry_column(request):
 		#print per_ind
 		response_data.append(per_ind)
 	return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+#市场容量指数图表
+def industry_line_chart(request):
+	
+	response = {}
+	scale_counts = {}
+	scale_y = []
+	scale_dates = []
+	industry_index_objs = industry_index.objects.order_by('ii_date')
+
+	for industry_index_obj in industry_index_objs:
+		scale_y.append(float(industry_index_obj.ii_index))
+		scale_dates.append((industry_index_obj.ii_date).strftime('%Y-%m-%d'))
+		scale_counts[(industry_index_obj.ii_date).strftime('%Y-%m-%d')] = industry_index_obj.ii_company
+
+	#print scale_y
+	response['scale_counts'] = scale_counts
+	response['scale_y'] = scale_y
+	response['scale_dates'] = scale_dates
+	response['scale_min_y'] = scale_y[0]
+	response['scale_max_y'] = scale_y[-1]
+
+	return HttpResponse(json.dumps(response),content_type="application/json")
+
+def otc_general_line_chart(request):
+	response = {}
+
+	general_dates = []
+	general_y = []
+	general_caps = {}
+
+	otc_index_objs = otc_index.objects.order_by('oi_date')
+
+	for otc_index_obj in otc_index_objs:
+		general_y.append(float(otc_index_obj.oi_index))
+		general_dates.append((otc_index_obj.oi_date).strftime('%Y-%m-%d'))
+		general_caps[(otc_index_obj.oi_date).strftime('%Y-%m-%d')] = otc_index_obj.oi_amount
+
+	response['general_dates'] = general_dates
+	response['general_y'] = general_y
+	response['general_caps'] = general_caps
+	response['general_min_y'] = general_y[0]
+	response['general_max_y'] = general_y[-1]
+
+	return HttpResponse(json.dumps(response),content_type="application/json")
+

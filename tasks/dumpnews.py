@@ -34,26 +34,27 @@ def dumpZXGZ():
 #抓取URL http://www.china-see.com/my_xxpl.jsp?cid=148&fid=135
 def dumpSHGQ():
   result = []
-  url = 'http://www.china-see.com/my_xxpl.jsp?cid=148&fid=135'
-  topUrl = 'http://www.china-see.com'
+  url = 'http://www.china-see.com/disclosure.do?articleType=pre_company'
+  topUrl = 'http://www.china-see.com/'
   opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-  html_doc = opener.open(url).read().decode('gb2312').encode('utf8')
+  html_doc = opener.open(url).read()
   soup = BeautifulSoup(html_doc)
 
-  table = soup.find('table',width="706")
-  trs = table.find_all('tr')
-  trs = trs[5:-4]
-  for tr in trs:
-    td = tr.find('td',background="myimages/xxpl_r19_c11.jpg")
-    #print td
-    if td is not None:
-      table = td.find('table')
-      tds = table.find('tr').find_all('td')
-      #根据时间进行筛选
-      #if tds[1].find('div').string == nowDay:
-      title = tds[0].find('a').string
-      title = title.split(' ')
-      result.append([title[0],topUrl+tds[0].find('a').get('href')[2:],title[1].encode('utf8'),tds[1].find('div').string])
+  #table = soup.find('table',width="706")
+  #trs = table.find_all('tr')
+  #trs = trs[5:-4]
+  div = soup.find('div',"wrap1Rsub1")
+  dls = div.find_all('dl')
+  for dl in dls:
+    a = dl.find('dt').find('a')
+    title = a.string
+    title = title.split(' ')
+    #print title[0]
+    #print topUrl+a.get('href')
+    #print title[1].encode('utf8')
+    #print dl.find('dd').string
+    result.append([title[0],topUrl+a.get('href'),title[1].encode('utf8'),dl.find('dd').string])
+  
   return result
 
 #抓取天津股权

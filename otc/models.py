@@ -58,13 +58,40 @@ class OTC(models.Model):
 	otc_name = models.CharField(max_length=100,verbose_name='名称')
 	otc_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总成交数量(股)')
 	otc_per = models.DecimalField(max_digits=10,decimal_places=5,verbose_name='交易比例')
-	otc_amount_per = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='日均交数量(股)')
+	otc_amount_per = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='日均交易量(股)')
 	otc_days = models.IntegerField(verbose_name='已挂牌天数',default=0)
 	otc_date = models.DateField(verbose_name='挂牌日期')
 	otc_tot_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总股本(股)')
+	otc_last_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格',default=0)
+	otc_tot_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='总市值(M)',default=0)
 
+	def __unicode__(self):
+		return self.otc_name
 
+	class Meta:
+		verbose_name = '挂牌企业数据'
+		verbose_name_plural = '挂牌企业数据'
 
+'''
+72家公司的指数
+'''
+class otc_index(models.Model):
+	oi_date = models.DateField(verbose_name="日期")
+	oi_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='指数')
+	oi_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新市值')
+
+'''
+72家公司每天的成交数据
+'''
+class otc_deal(models.Model):
+	od_OTC = models.ForeignKey(OTC,verbose_name='公司名称')
+	od_date = models.DateField(verbose_name="日期")
+	od_volume = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='交易量(股)')
+	od_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格')
+
+	class Meta:
+		verbose_name = '每日成交量'
+		verbose_name_plural = '每日成交量'
 
 '''
 行业方向
@@ -155,7 +182,7 @@ class otc_base(models.Model):
 	base_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="成分指数")
 	base_company_index =models.DecimalField(max_digits=15,decimal_places=5,verbose_name="市场容量指数")
 	base_trans = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="最新市值")
-	base_company = models.DecimalField(max_digits=15,decimal_places=5,verbose_name="总挂牌企业数量")
+	base_company = models.IntegerField(verbose_name="总挂牌企业数量")
 
 	class Meta:
 		verbose_name = "基础数据"

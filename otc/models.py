@@ -68,6 +68,10 @@ class OTC(models.Model):
 	def __unicode__(self):
 		return self.otc_name
 
+	class Meta:
+		verbose_name = '挂牌企业数据'
+		verbose_name_plural = '挂牌企业数据'
+
 '''
 72家公司的指数
 '''

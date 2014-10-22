@@ -82,6 +82,10 @@ class otc_deal(models.Model):
 	od_volume = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='交易量(股)')
 	od_price = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新价格')
 
+	class Meta:
+		verbose_name = '每日成交量'
+		verbose_name_plural = '每日成交量'
+
 '''
 行业方向
 公司数量

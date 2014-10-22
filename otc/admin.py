@@ -36,6 +36,10 @@ class OtcDealAdmin(admin.ModelAdmin):
 	list_filter = ['od_date']
 	search_fields = ['od_date']
 
+class OTCAdmin(admin.ModelAdmin):
+	list_display = ['otc_name','otc_code','otc_amount','otc_per','otc_amount_per','otc_days','otc_date','otc_tot_amount','otc_last_price','otc_tot_price']
+
+
 # Register your models here.
 admin.site.register(industry,IndustryAdmin)
 admin.site.register(region)
@@ -45,3 +49,4 @@ admin.site.register(otc_study,OTCStudyAdmin)
 admin.site.register(otc_base,OTCBaseAdmin)
 admin.site.register(industry_index,IndustryIndexAdmin)
 admin.site.register(otc_deal,OtcDealAdmin)
+admin.site.register(OTC,OTCAdmin)

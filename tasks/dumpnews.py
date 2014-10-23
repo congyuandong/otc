@@ -89,8 +89,8 @@ def dumpQLGQ():
   subUrl = 'http://www.zbotc.com'
   opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
   html_doc = opener.open(url).read()
-  html_doc=html_doc.replace(">>",">")
   soup = BeautifulSoup(html_doc)
+
   table = soup.find('table',width="98%")
   tr = table.find_all('tr')[1]
   td = tr.find('td',height="600")
@@ -99,6 +99,7 @@ def dumpQLGQ():
   for tr in trs:
     tds = tr.find_all('td')
     title = tds[0].find('a').string
+    title=title.split(' ')
     urlin = subUrl+tds[0].find('a').get('href')[1:]
     opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
     html_docin = opener.open(urlin).read()
@@ -106,7 +107,8 @@ def dumpQLGQ():
     div=soupin.find('div',"standw bc")
     div=div.find('div',"contxt")
     dl=div.find('dl')
-    result.append([title[0:6],subUrl+dl.find('a').get('href')[8:],title[7:].encode('utf8'),tds[1].string])
+    result.append([title[0].encode('utf8'),subUrl+dl.find('a').get('href')[8:],title[1].encode('utf8'),tds[1].string])
+  
   return result
 #抓取重庆股权
 #主要URL  http://www.chn-cstc.com/
@@ -195,5 +197,4 @@ def dumpNews():
   dumpZJGQ()
 
 if __name__ == '__main__':
-  #dumpNews()
-  dumpQLGQ()
+  dumpNews()

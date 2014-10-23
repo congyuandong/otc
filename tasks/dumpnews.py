@@ -155,7 +155,6 @@ def dumpZJGQ():
   lis=div.find('ul').find_all('li')
   for li in lis:
     result.append(['',subUrl+li.find('a').get('href'),li.find('a').string.encode('utf8'),li.find('span').string[1:11]])
-  
   return result  
 
 
@@ -176,7 +175,6 @@ def dumpGZGQ():
     title=li.find('a').string
     title=title.split(' ')
     result.append([title[0],subUrl+li.find('a').get('href'),title[1].encode('utf8'),li.find('span').string[1:11]])
-  
   return result
 
 
@@ -189,11 +187,11 @@ def dumpNews():
   dumpZXGZ()
   dumpSHGQ()
   dumpTJGQ()
-  dumpQLGQ()
+  #dumpQLGQ()
   dumpCQGQ()
   dumpGZGQ()
   dumpZJGQ()
 
 if __name__ == '__main__':
-  #dumpNews()
-  dumpQLGQ()
+  dumpNews()
+  #dumpQLGQ()

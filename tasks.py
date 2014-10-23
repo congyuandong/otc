@@ -52,7 +52,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-
+	
 	'''
 	qlgqNews = dumpQLGQ()
 	for new in qlgqNews:
@@ -64,7 +64,6 @@ def dump_otc_news():
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
 	'''
-
 	cqgqNews = dumpCQGQ()
 	for new in cqgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])

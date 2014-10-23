@@ -99,7 +99,6 @@ def dumpQLGQ():
   for tr in trs:
     tds = tr.find_all('td')
     title = tds[0].find('a').string
-    title=title.split(' ')
     urlin = subUrl+tds[0].find('a').get('href')[1:]
     opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
     html_docin = opener.open(urlin).read()
@@ -107,7 +106,7 @@ def dumpQLGQ():
     div=soupin.find('div',"standw bc")
     div=div.find('div',"contxt")
     dl=div.find('dl')
-    result.append([title[0].encode('utf8'),subUrl+dl.find('a').get('href')[8:],title[1].encode('utf8'),tds[1].string])
+    result.append([title[0:6],subUrl+dl.find('a').get('href')[8:],title[7:].encode('utf8'),tds[1].string])
   
   return result
 #抓取重庆股权
@@ -136,11 +135,7 @@ def dumpCQGQ():
 #抓取安徽股权
 #主要URL  http://www.ahsgq.com/
 #抓取
-def dumpAHGQ():
-  result=[]
   
-  return result
-
 #抓取浙江股权
 #主要URL http://www.zjnpse.com
 #抓取http://www.zjnpse.com/view/news.php?func=listAll&catalog=0501

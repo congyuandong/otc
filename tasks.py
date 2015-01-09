@@ -5,6 +5,7 @@ from threading import Timer
 import time
 from tasks.dumpnews import *
 from tasks.dumpOtc import *
+from tasks.dumpOtc1 import *
 os.environ['DJANGO_SETTINGS_MODULE'] ='scrapy.settings'
 from django.conf import settings
 #from django.contrib.auth.models import User, check_password
@@ -73,7 +74,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-
+	'''
 	zjgqNews = dumpZJGQ()
 	for new in zjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -83,7 +84,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-
+	'''
 	gzgqNews = dumpGZGQ()
 	for new in gzgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -137,7 +138,7 @@ def anaIndustryIndex():
 
 #抓取场外市场数据
 def dump_otc():
-	otcs = dumpotc()
+	otcs = dumpotc1()
 	#print type(otcs)
 	OTC_objs = OTC.objects.all()
 	for OTC_obj in OTC_objs:

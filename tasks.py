@@ -22,6 +22,7 @@ def sync_otc_base():
 #抓取新闻 包括中小股转，上海股交，其他股交
 #code title url 日期
 def dump_otc_news():
+	print '中小型企业新闻抓取'
 	zxgzNews = dumpZXGZ()
 	for new in zxgzNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -45,6 +46,7 @@ def dump_otc_news():
 	'''
 
 	tjgqNews = dumpTJGQ()
+	print '天津新闻抓取'
 	for new in tjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
@@ -66,6 +68,7 @@ def dump_otc_news():
 			print '已经存在数据',new[0],new[1],new[2]
 	'''
 	cqgqNews = dumpCQGQ()
+	print '重庆新闻抓取'
 	for new in cqgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
@@ -86,6 +89,7 @@ def dump_otc_news():
 			print '已经存在数据',new[0],new[1],new[2]
 	'''
 	gzgqNews = dumpGZGQ()
+	print '广州新闻抓取'
 	for new in gzgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:

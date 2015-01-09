@@ -83,7 +83,9 @@ def remoteData(url):
 def neeq():
 	global data_dict
 	for url in neeq_url:
+
 		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm={}".format(url)
+		print full_url
 		# www.neeq.cc/ajax/QTHangQinByzqdm?zqdm=430357
 		#print full_url
 		remoteData_dict = remoteData(full_url)

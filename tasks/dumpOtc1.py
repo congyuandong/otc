@@ -45,7 +45,7 @@ def china_see():
 	global data_dict
 	for url in chinasee_url:
 		# 以下为新地址2014-12-28
-		full_url = "http://www.china-see.com/stockCodeDealInfo.do?stockCode={}".format(url)
+		full_url = "http://www.china-see.com/stockCodeDealInfo.do?stockCode="+url
 		#print full_url
 		req = urllib2.Request(full_url)
 		resp = urllib2.urlopen(req)
@@ -84,8 +84,8 @@ def neeq():
 	global data_dict
 	for url in neeq_url:
 
-		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm={}".format(url)
-		print full_url
+		full_url = "http://www.neeq.cc/ajax/QTHangQinByzqdm?zqdm="+url
+		#print full_url
 		# www.neeq.cc/ajax/QTHangQinByzqdm?zqdm=430357
 		#print full_url
 		remoteData_dict = remoteData(full_url)

@@ -20,7 +20,9 @@ def dumpZXGZ():
   
   #print '进入中小型企业股权抓取新闻'
   result = []
+
   url = 'http://bjzr.gfzr.com.cn/bjzr/zxggnew.js'
+  #print urllib2.urlopen(url).read()
   news = urllib2.urlopen(url).read().decode('gbk').encode('utf8')
   news = news[17:len(news)-1]
   #print json.dumps(result)

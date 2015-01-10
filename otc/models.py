@@ -80,6 +80,8 @@ class otc_index(models.Model):
 	oi_index = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='指数')
 	oi_amount = models.DecimalField(max_digits=15,decimal_places=5,verbose_name='最新市值')
 
+	
+
 '''
 72家公司每天的成交数据
 '''

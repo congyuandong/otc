@@ -23,6 +23,7 @@ def sync_otc_base():
 #code title url 日期
 def dump_otc_news():
 	print '中小型企业新闻抓取'
+	'''
 	zxgzNews = dumpZXGZ()
 	for new in zxgzNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -32,7 +33,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-
+	'''
 	'''
 	shgqNews = dumpSHGQ()
 	for new in shgqNews:
@@ -109,6 +110,7 @@ def anaIndustryIndex():
 
 	industry_objs = industry.objects.all()
 	for industry_obj in industry_objs:
+		#市场挂牌企业数
 		tot_comp += industry_obj.in_num
 	#计算指数
 	index = round(tot_comp/base_comp*100,2)
@@ -194,17 +196,19 @@ def anaOtcIndex():
 	OTC_objs = OTC.objects.all()
 
 	for OTC_obj in OTC_objs:
+		#总市场交易值
 		totOTCIndex += OTC_obj.otc_tot_price
 
 	#计算市场指数	
 	OTCindex = round(float(totOTCIndex)/100000/baseOtcIndex*100,2)
-
+	#otc_index
 	oi_objs = otc_index.objects.filter(oi_date=date.today())
 	if oi_objs:
+		#otc_index改变
 		oi_objs[0].oi_index = str(OTCindex)
 		oi_objs[0].oi_amount = totOTCIndex/100000
 		oi_objs[0].save()
-
+		#otc_base基础数据改变
 		otc_base_last = otc_base.objects.order_by('base_date')
 		if otc_base_last:
 			otc_base_last[0].base_index = str(OTCindex)

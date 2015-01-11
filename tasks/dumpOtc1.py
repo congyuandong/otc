@@ -61,6 +61,7 @@ def china_see():
 			#'date':"".join(li[1].split('-')),
 			#'date':li[1].string,
 			#'date':time.strptime(li[1][4:],'%Y-%m-%d'),
+			#'date':"".join(li[1][4:].split('-')),
 			'date':"".join(li[1].split('-')),
 			'latest_price':float(li[3]),
 			'volume':int(li[10])
@@ -119,7 +120,7 @@ def dumpotc1():
 	#global data_dict
 	neeq()
 	china_see()
-	print data_dict
+	#print data_dict
 	return data_dict
 if __name__ == "__main__":
 	#global data_dict

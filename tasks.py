@@ -22,7 +22,7 @@ def sync_otc_base():
 #抓取新闻 包括中小股转，上海股交，其他股交
 #code title url 日期
 def dump_otc_news():
-	print '中小型企业新闻抓取'
+	print '抓取中小型企业新闻'
 	'''
 	zxgzNews = dumpZXGZ()
 	for new in zxgzNews:
@@ -34,7 +34,8 @@ def dump_otc_news():
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
 	'''
-	'''
+
+	print '抓取上海新闻'
 	shgqNews = dumpSHGQ()
 	for new in shgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -44,10 +45,9 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-	'''
-
+	
+	print'抓取天津新闻'
 	tjgqNews = dumpTJGQ()
-	print '天津新闻抓取'
 	for new in tjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
@@ -56,7 +56,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-	
+	print'抓取齐鲁新闻'
 	'''
 	qlgqNews = dumpQLGQ()
 	for new in qlgqNews:
@@ -67,9 +67,9 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-	'''
+	'''	
+	print '抓取重庆新闻'
 	cqgqNews = dumpCQGQ()
-	print '重庆新闻抓取'
 	for new in cqgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
@@ -78,7 +78,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-	'''
+	print '抓取浙江新闻'
 	zjgqNews = dumpZJGQ()
 	for new in zjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -88,9 +88,8 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
-	'''
+	print '抓取广州新闻'
 	gzgqNews = dumpGZGQ()
-	print '广州新闻抓取'
 	for new in gzgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
@@ -110,7 +109,6 @@ def anaIndustryIndex():
 
 	industry_objs = industry.objects.all()
 	for industry_obj in industry_objs:
-		#市场挂牌企业数
 		tot_comp += industry_obj.in_num
 	#计算指数
 	index = round(tot_comp/base_comp*100,2)
@@ -145,7 +143,7 @@ def anaIndustryIndex():
 #抓取场外市场数据
 def dump_otc():
 	otcs = dumpotc1()
-	#print type(otcs)
+	#print otcs
 	OTC_objs = OTC.objects.all()
 	for OTC_obj in OTC_objs:
 		#如果有该公司的交易数据
@@ -196,19 +194,17 @@ def anaOtcIndex():
 	OTC_objs = OTC.objects.all()
 
 	for OTC_obj in OTC_objs:
-		#总市场交易值
 		totOTCIndex += OTC_obj.otc_tot_price
 
 	#计算市场指数	
 	OTCindex = round(float(totOTCIndex)/100000/baseOtcIndex*100,2)
-	#otc_index
+
 	oi_objs = otc_index.objects.filter(oi_date=date.today())
 	if oi_objs:
-		#otc_index改变
 		oi_objs[0].oi_index = str(OTCindex)
 		oi_objs[0].oi_amount = totOTCIndex/100000
 		oi_objs[0].save()
-		#otc_base基础数据改变
+
 		otc_base_last = otc_base.objects.order_by('base_date')
 		if otc_base_last:
 			otc_base_last[0].base_index = str(OTCindex)
@@ -248,6 +244,7 @@ def schedule():
 	task.start()
 
 if __name__ == '__main__':
+	
 	runTasks()
 	#dump_otc()
 	#anaOtcIndex()

@@ -43,8 +43,8 @@ def dump_otc_news():
 			n = otc_new(new_region=region.objects.get(reg_name='上海'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
 			print '存储数据',new[0],new[1],new[2]
-		else:
-			print '已经存在数据',new[0],new[1],new[2]
+		#else:
+		#	print '已经存在数据',new[0],new[1],new[2]
 	
 	print'抓取天津新闻'
 	tjgqNews = dumpTJGQ()
@@ -54,8 +54,8 @@ def dump_otc_news():
 			n = otc_new(new_region=region.objects.get(reg_name='天津'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
 			print '存储数据',new[0],new[1],new[2]
-		else:
-			print '已经存在数据',new[0],new[1],new[2]
+		#else:
+		#	print '已经存在数据',new[0],new[1],new[2]
 	print'抓取齐鲁新闻'
 	'''
 	qlgqNews = dumpQLGQ()
@@ -76,8 +76,9 @@ def dump_otc_news():
 			n = otc_new(new_region=region.objects.get(reg_name='重庆'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
 			print '存储数据',new[0],new[1],new[2]
-		else:
-			print '已经存在数据',new[0],new[1],new[2]
+		#else:
+		#	print '已经存在数据',new[0],new[1],new[2]
+	
 	print '抓取浙江新闻'
 	zjgqNews = dumpZJGQ()
 	for new in zjgqNews:
@@ -86,8 +87,9 @@ def dump_otc_news():
 			n=otc_new(new_region=region.objects.get(reg_name='浙江'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
 			print '存储数据',new[0],new[1],new[2]
-		else:
-			print '已经存在数据',new[0],new[1],new[2]
+		#else:
+		#	print '已经存在数据',new[0],new[1],new[2]
+	
 	print '抓取广州新闻'
 	gzgqNews = dumpGZGQ()
 	for new in gzgqNews:
@@ -96,8 +98,8 @@ def dump_otc_news():
 			n = otc_new(new_region=region.objects.get(reg_name='广州'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
 			print '存储数据',new[0],new[1],new[2]
-		else:
-			print '已经存在数据',new[0],new[1],new[2]
+		#else:
+			#print '已经存在数据',new[0],new[1],new[2]
 
 
 
@@ -239,8 +241,10 @@ def runTasks():
 	schedule()
 
 def schedule():
-	timer_interval = 1200
+	print time.strftime('%H:%M:%S',time.localtime(time.time()))
+	timer_interval = 120
 	task = Timer(timer_interval,runTasks)
+	print '开始再次抓取'
 	task.start()
 
 if __name__ == '__main__':

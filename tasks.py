@@ -6,6 +6,7 @@ import time
 from tasks.dumpnews import *
 from tasks.dumpOtc import *
 from tasks.dumpOtc1 import *
+from tasks.dumpIndustry import *
 os.environ['DJANGO_SETTINGS_MODULE'] ='scrapy.settings'
 from django.conf import settings
 #from django.contrib.auth.models import User, check_password
@@ -33,8 +34,8 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		else:
 			print '已经存在数据',new[0],new[1],new[2]
+	
 	'''
-
 	print '抓取上海新闻'
 	shgqNews = dumpSHGQ()
 	for new in shgqNews:
@@ -80,6 +81,7 @@ def dump_otc_news():
 		#	print '已经存在数据',new[0],new[1],new[2]
 	
 	print '抓取浙江新闻'
+	'''
 	zjgqNews = dumpZJGQ()
 	for new in zjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -89,7 +91,7 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
-	
+	'''
 	print '抓取广州新闻'
 	gzgqNews = dumpGZGQ()
 	for new in gzgqNews:
@@ -101,7 +103,17 @@ def dump_otc_news():
 		#else:
 			#print '已经存在数据',new[0],new[1],new[2]
 
-
+def dump_industry():
+	tjcomp=TJCOMP()
+	#print tjcomp
+	#print 'haha'
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
+	#print comp[0].in_num
+	if comp:
+		if comp[0].in_num!=tjcomp:
+			comp[0].in_num=tjcomp
+			comp[0].in_date=date.today()
+			comp[0].save()
 
 #计算市场容量指数
 def anaIndustryIndex():
@@ -161,7 +173,8 @@ def dump_otc():
 				OTC_obj.otc_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/float(OTC_obj.otc_tot_amount))
 				OTC_obj.otc_amount_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))/(OTC_obj.otc_days+1))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume'])))
+					#OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume'])))
+					OTC_obj.otc_tot_price=str(float(otcs[OTC_obj.otc_code]['latest_price'])*float(OTC_obj.otc_tot_amount)/1000000)
 				OTC_obj.otc_days += 1
 				OTC_obj.otc_amount = str(float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
@@ -174,7 +187,12 @@ def dump_otc():
 				OTC_obj.otc_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))/float(OTC_obj.otc_tot_amount))
 				OTC_obj.otc_amount_per = str((float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))/OTC_obj.otc_days)
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
-					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume)))
+					#OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * (float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume)))
+					#tot_price=float(otcs[OTC_obj.otc_code]['latest_price'])*float(OTC_obj.otc_tot_amount)
+					OTC_obj.otc_tot_price = str(float(otcs[OTC_obj.otc_code]['latest_price']) * float(OTC_obj.otc_tot_amount)/1000000)
+					#print OTC_obj.otc_tot_price
+					#OTC_obj.otc_tot_price=str(float(otcs[OTC_obj.otc_code]['latest_price'])*float(OTC_obj.otc_tot_amount))
+					
 				OTC_obj.otc_amount = str(float(OTC_obj.otc_amount) + float(otcs[OTC_obj.otc_code]['volume']) - float(otc_deal_objs[0].od_volume))
 				if otcs[OTC_obj.otc_code]['latest_price'] != 0:
 					OTC_obj.otc_last_price = str(otcs[OTC_obj.otc_code]['latest_price'])
@@ -199,30 +217,30 @@ def anaOtcIndex():
 		totOTCIndex += OTC_obj.otc_tot_price
 
 	#计算市场指数	
-	OTCindex = round(float(totOTCIndex)/100000/baseOtcIndex*100,2)
+	OTCindex = round(float(totOTCIndex)/baseOtcIndex*100,2)
 
 	oi_objs = otc_index.objects.filter(oi_date=date.today())
 	if oi_objs:
 		oi_objs[0].oi_index = str(OTCindex)
-		oi_objs[0].oi_amount = totOTCIndex/100000
+		oi_objs[0].oi_amount = totOTCIndex
 		oi_objs[0].save()
 
 		otc_base_last = otc_base.objects.order_by('base_date')
 		if otc_base_last:
 			otc_base_last[0].base_index = str(OTCindex)
-			otc_base_last[0].base_trans = totOTCIndex/100000
+			otc_base_last[0].base_trans = totOTCIndex
 			otc_base_last[0].base_date = date.today()
 			otc_base_last[0].save()
 
 		print '更新市场指数'
 	else:
-		oi_obj_new = otc_index(oi_date=date.today(),oi_index=str(OTCindex),oi_amount=totOTCIndex/100000)
+		oi_obj_new = otc_index(oi_date=date.today(),oi_index=str(OTCindex),oi_amount=totOTCIndex/1000000)
 		oi_obj_new.save()
 
 		otc_base_last = otc_base.objects.order_by('base_date')
 		if otc_base_last:
 			otc_base_last[0].base_index = str(OTCindex)
-			otc_base_last[0].base_trans = totOTCIndex/100000
+			otc_base_last[0].base_trans = totOTCIndex
 			otc_base_last[0].base_date = date.today()
 			otc_base_last[0].save()
 
@@ -231,6 +249,8 @@ def anaOtcIndex():
 def runTasks():
 	print '开始抓取新闻'
 	dump_otc_news()
+	print '开始更新市场容量'
+	dump_industry()
 	print '开始抓取交易数据'
 	dump_otc()
 	print '开始计算市场容量指数'
@@ -242,7 +262,7 @@ def runTasks():
 
 def schedule():
 	print time.strftime('%H:%M:%S',time.localtime(time.time()))
-	timer_interval = 120
+	timer_interval = 1200
 	task = Timer(timer_interval,runTasks)
 	print '开始再次抓取'
 	task.start()

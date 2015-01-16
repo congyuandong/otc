@@ -105,16 +105,21 @@ def dump_otc_news():
 
 def dump_industry():
 	tjcomp=TJCOMP()
-	#print tjcomp
-	#print 'haha'
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
-	#print comp[0].in_num
 	if comp:
-		if comp[0].in_num!=tjcomp:
+		if str(comp[0].in_num)!=tjcomp:
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 
+	jscomp=JSCOMP()
+	#print jscomp
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='江苏'))
+	if comp: 
+		if str(comp[0].in_num)!=jscomp:
+			comp[0].in_num=jscomp
+			comp[0].in_date=date.today()
+			comp[0].save()
 #计算市场容量指数
 def anaIndustryIndex():
 	#假定2013年1月16日公司总数为651家
@@ -207,8 +212,8 @@ def dump_otc():
 
 #计算市场的交易指数
 def anaOtcIndex():
-	#假定2014年1月1日市场总值为1041.7065M
-	baseOtcIndex = 1041.7065
+	#假定2014年1月1日市场总值为50041.7065M
+	baseOtcIndex = 10041.7065
 	totOTCIndex = 0
 
 	OTC_objs = OTC.objects.all()
@@ -218,7 +223,7 @@ def anaOtcIndex():
 
 	#计算市场指数	
 	OTCindex = round(float(totOTCIndex)/baseOtcIndex*100,2)
-
+	print str(totOTCIndex)
 	oi_objs = otc_index.objects.filter(oi_date=date.today())
 	if oi_objs:
 		oi_objs[0].oi_index = str(OTCindex)

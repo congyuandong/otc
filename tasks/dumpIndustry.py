@@ -74,11 +74,73 @@ def AHCOMP():
 	'''
 	num=strong.string
 	print num
+	print 'anhui'
+def JSCOMP():
+	'''
+	江苏挂牌
+	'''
+	url='http://www.jseec.com.cn/display/index.jhtml'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"pagination").find('div')
+	num=div.text.encode('utf8')[4:6]
+	print num+'jiangsu'
+	return num
+
+def GZCOMP():
+	'''
+	广州挂牌
+	'''
+	url='http://www.china-gee.com/frontpage/index.jsp'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"box")
+	li=div.find_all('li')[0]
+	num=li.string.encode('utf8')[15:19]
+	print num+'guangzhou'
+	return num
+def LNCOMP():
+	'''
+	辽宁挂牌
+	'''
+	url='http://www.clnee.com/center/index.jhtml?locale=zh_CN'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"market")
+	tr=div.find_all('tr')[0]
+	num=tr.find_all('td')[1].find('span').string
+	print num+'liaoning'
+	return num
+
+def XJCOMP():
+	'''
+	新疆挂牌
+	'''
+	url='http://www.casdaq.com.cn/'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"market-data-con")
+	li=div.find('ul').find_all('li')[4]
+	num=li.find('em').string
+	print num+'xinjiang'
+	return num
+
+def GSCOMP():
+	print 'hha'
+
 def dumpComp():
 	TJCOMP()
-	#QLCOMP()
-	WHCOMP()
 	AHCOMP()
+	JSCOMP()
+	GZCOMP()
+	LNCOMP()
+	XJCOMP()
+	#QLCOMP()
+	#WHCOMP()
 if __name__ == '__main__':
 	dumpComp()
 

@@ -212,7 +212,7 @@ def dump_otc():
 
 #计算市场的交易指数
 def anaOtcIndex():
-	#假定2014年1月1日市场总值为50041.7065M
+	#假定2014年1月1日市场总值为10041.7065M
 	baseOtcIndex = 10041.7065
 	totOTCIndex = 0
 

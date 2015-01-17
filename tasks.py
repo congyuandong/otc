@@ -239,7 +239,7 @@ def anaOtcIndex():
 
 		print '更新市场指数'
 	else:
-		oi_obj_new = otc_index(oi_date=date.today(),oi_index=str(OTCindex),oi_amount=totOTCIndex/1000000)
+		oi_obj_new = otc_index(oi_date=date.today(),oi_index=str(OTCindex),oi_amount=totOTCIndex)
 		oi_obj_new.save()
 
 		otc_base_last = otc_base.objects.order_by('base_date')

@@ -122,8 +122,8 @@ def dump_industry():
 			comp[0].save()
 #计算市场容量指数
 def anaIndustryIndex():
-	#假定2013年1月16日公司总数为651家
-	base_comp = 651.0
+	#假定2013年1月16日公司总数为3189家
+	base_comp = 3189.0
 	tot_comp = 0.0
 
 	industry_objs = industry.objects.all()

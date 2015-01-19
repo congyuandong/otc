@@ -129,10 +129,10 @@ def anaIndustryIndex():
 	industry_objs = industry.objects.all()
 	for industry_obj in industry_objs:
 		tot_comp += industry_obj.in_num
-		print str(tot_comp)
+
 	#计算指数
 	index = round(tot_comp/base_comp*100,2)
-	
+	print str(index)
 	ii_objs = industry_index.objects.filter(ii_date=date.today())
 	if ii_objs:
 		ii_objs[0].ii_index = str(index)

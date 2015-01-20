@@ -104,6 +104,7 @@ def dump_otc_news():
 			#print '已经存在数据',new[0],new[1],new[2]
 
 def dump_industry():
+	'''
 	tjcomp=TJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
 	if comp:
@@ -112,6 +113,7 @@ def dump_industry():
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+	'''
 
 	jscomp=JSCOMP()
 	#print jscomp

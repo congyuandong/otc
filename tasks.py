@@ -116,12 +116,12 @@ def dump_industry():
 	'''
 
 	jscomp=JSCOMP()
-	#print jscomp
+	print jscomp
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='江苏'))
 	if comp: 
 		if str(comp[0].in_num)!=jscomp:
 			print '更新江苏挂牌'
-			print jscomp
+			#print jscomp
 			comp[0].in_num=int(jscomp)
 			comp[0].in_date=date.today()
 			comp[0].save()

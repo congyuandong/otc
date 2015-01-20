@@ -128,6 +128,7 @@ def dump_industry():
 	'''
 
 	xjcomp=XJCOMP()
+	print int(xjcomp)
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))
 	if comp:
 		if str(comp[0].in_num)!=xjcomp:
@@ -306,10 +307,10 @@ def anaOtcIndex():
 def runTasks():
 	print '开始抓取新闻'
 	dump_otc_news()
-	
+	'''
 	print '开始更新市场容量'
 	dump_industry()
-	
+	'''
 	print '开始抓取交易数据'
 	dump_otc()
 	print '开始计算市场容量指数'

@@ -121,7 +121,7 @@ def dump_industry():
 	if comp: 
 		if str(comp[0].in_num)!=jscomp:
 			print '更新江苏挂牌'
-			comp[0].in_num=jscomp
+			comp[0].in_num=int(jscomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -130,7 +130,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=xjcomp:
 			print '更新新疆挂牌'
-			comp[0].in_num=xjcomp
+			comp[0].in_num=int(xjcomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -139,7 +139,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=gzcomp:
 			print '更新广州挂牌'
-			comp[0].in_num=gzcomp
+			comp[0].in_num=int(gzcomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -148,7 +148,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=sxcomp:
 			print '更新山西挂牌'
-			comp[0].in_num=sxcomp
+			comp[0].in_num=int(sxcomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -157,7 +157,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=lncomp:
 			print '更新辽宁挂牌'
-			comp[0].in_num=lncomp
+			comp[0].in_num=int(lncomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -166,7 +166,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=zjcomp:
 			print '更新浙江挂牌'
-			comp[0].in_num=zjcomp
+			comp[0].in_num=int(zjcomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
 #计算市场容量指数

@@ -302,10 +302,10 @@ def anaOtcIndex():
 def runTasks():
 	print '开始抓取新闻'
 	dump_otc_news()
-	'''
+	
 	print '开始更新市场容量'
 	dump_industry()
-	'''
+	
 	print '开始抓取交易数据'
 	dump_otc()
 	print '开始计算市场容量指数'

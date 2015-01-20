@@ -113,7 +113,7 @@ def dump_industry():
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
-	'''
+	
 
 	jscomp=JSCOMP()
 	print jscomp
@@ -125,6 +125,7 @@ def dump_industry():
 			comp[0].in_num=int(jscomp)
 			comp[0].in_date=date.today()
 			comp[0].save()
+	'''
 
 	xjcomp=XJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))

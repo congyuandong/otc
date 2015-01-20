@@ -121,6 +121,7 @@ def dump_industry():
 	if comp: 
 		if str(comp[0].in_num)!=jscomp:
 			print '更新江苏挂牌'
+			print jscomp
 			comp[0].in_num=int(jscomp)
 			comp[0].in_date=date.today()
 			comp[0].save()

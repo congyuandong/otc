@@ -24,18 +24,18 @@ def sync_otc_base():
 #code title url 日期
 def dump_otc_news():
 	print '抓取中小型企业新闻'
-	'''
-	zxgzNews = dumpZXGZ()
+	
+	zxgzNews = dumpZXGQ()
 	for new in zxgzNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
 		if not found:
 			n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 			n.save()
-			print '存储数据',new[0],new[1],new[2]
+			print '存储数据',new[0],new[1]
 		else:
-			print '已经存在数据',new[0],new[1],new[2]
+			print '已经存在数据',new[0],new[1]
 	
-	'''
+	
 	print '抓取上海新闻'
 	shgqNews = dumpSHGQ()
 	for new in shgqNews:
@@ -79,9 +79,9 @@ def dump_otc_news():
 			print '存储数据',new[0],new[1],new[2]
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
-	
-	print '抓取浙江新闻'
 	'''
+	print '抓取浙江新闻'
+	
 	zjgqNews = dumpZJGQ()
 	for new in zjgqNews:
 		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
@@ -108,6 +108,7 @@ def dump_industry():
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
 	if comp:
 		if str(comp[0].in_num)!=tjcomp:
+			print '更新天津挂牌'
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
@@ -117,7 +118,53 @@ def dump_industry():
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='江苏'))
 	if comp: 
 		if str(comp[0].in_num)!=jscomp:
+			print '更新江苏挂牌'
 			comp[0].in_num=jscomp
+			comp[0].in_date=date.today()
+			comp[0].save()
+
+	xjcomp=XJCOMP()
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))
+	if comp:
+		if str(comp[0].in_num)!=xjcomp:
+			print '更新新疆挂牌'
+			comp[0].in_num=xjcomp
+			comp[0].in_date=date.today()
+			comp[0].save()
+
+	gzcomp=GZCOMP()
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='广州'))
+	if comp:
+		if str(comp[0].in_num)!=gzcomp:
+			print '更新广州挂牌'
+			comp[0].in_num=gzcomp
+			comp[0].in_date=date.today()
+			comp[0].save()
+
+	sxcomp=SXCOMP()
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='山西'))
+	if comp:
+		if str(comp[0].in_num)!=sxcomp:
+			print '更新山西挂牌'
+			comp[0].in_num=sxcomp
+			comp[0].in_date=date.today()
+			comp[0].save()
+
+	lncomp=LNCOMP()
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='辽宁'))
+	if comp:
+		if str(comp[0].in_num)!=lncomp:
+			print '更新辽宁挂牌'
+			comp[0].in_num=lncomp
+			comp[0].in_date=date.today()
+			comp[0].save()
+
+	zjcomp=ZJCOMP()
+	comp=industry.objects.filter(in_region=region.objects.get(reg_name='浙江'))
+	if comp:
+		if str(comp[0].in_num)!=zjcomp:
+			print '更新浙江挂牌'
+			comp[0].in_num=zjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 #计算市场容量指数

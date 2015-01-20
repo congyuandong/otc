@@ -130,15 +130,72 @@ def XJCOMP():
 	return num
 
 def GSCOMP():
-	print 'hha'
-
+	'''
+	甘肃挂牌
+	'''
+	url='http://www.gsotc.com.cn/main/home/index.shtml'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"index_right").find('div',"tablebox")
+	print div
+	tr=div.find('table').find_all('tr')[0]
+	print tr
+	num=tr.find('td').string
+	print num+'gansu'
+def ZJCOMP():
+	'''
+	浙江挂牌
+	'''
+	url='http://www.zjex.com.cn/'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find('div',"contbox")
+	div=div.find('div',"datamap")
+	ul=div.find('ul',"fr")
+	li=ul.find_all('li')[0]
+	num=li.find_all('span')[1].string
+	print num+'zhejiang'
+	return num
+def QHCOMP():
+	'''
+	前海挂牌
+	'''
+	url='https://www.qhee.com/'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	div=soup.find_all('div',"binder-open-url")[0]
+	div=div.find('div')
+	num=div.string
+	print num
+def SXCOMP():
+	'''
+	山西挂牌
+	'''
+	url ='http://www.sxgq.net/GQJYPT/index/gpqy_list.jsp'
+	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+	html_doc=opener.open(url).read()
+	soup=BeautifulSoup(html_doc)
+	table=soup.find('table',height="94")
+	span=table.find_all('span')[0]
+	num=span.string
+	print num+'shanxi'
+	return num
 def dumpComp():
+	
 	TJCOMP()
 	AHCOMP()
 	JSCOMP()
 	GZCOMP()
 	LNCOMP()
 	XJCOMP()
+	ZJCOMP()
+	#QHCOMP()
+	SXCOMP()
+
+	#GSCOMP()
 	#QLCOMP()
 	#WHCOMP()
 if __name__ == '__main__':

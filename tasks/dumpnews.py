@@ -16,6 +16,27 @@ encoding_support = ContentEncodingProcessor()
 #抓取中小股转
 #主URL http://www.neeq.cc/disclosure
 #最新公告URL http://bjzr.gfzr.com.cn/bjzr/zxggnew.js
+def dumpZXGQ():
+  result=[]
+  surl='http://file.neeq.com.cn/upload'
+  url='http://www.neeq.com.cn/controller/GetDisclosureannouncementPage?type=1&company_cd=&key=&subType=0&startDate=2014-12-22&endDate=2015-01-20&queryParams=0&page=1&_=1421744596585'
+  req=urllib2.Request(url)
+  resp=urllib2.urlopen(req)
+  json_json=resp.read()
+  json_dict=json.loads(json_json)
+  #print json_dict
+  disclosureInfos_json=json_dict['disclosureInfos']
+  #print disclosureInfos_json
+  for i in range(len(disclosureInfos_json)):
+    '''
+    print disclosureInfos_json[i]['companyCode']
+    print disclosureInfos_json[i]['publishDateString']
+    print disclosureInfos_json[i]['filePath']
+    print disclosureInfos_json[i]['title'].encode('utf8')
+    '''
+    result.append([disclosureInfos_json[i]['companyCode'],surl+disclosureInfos_json[i]['filePath'],disclosureInfos_json[i]['title'],disclosureInfos_json[i]['publishDateString']])
+  #print result
+  return result
 def dumpZXGZ():
   
   #print '进入中小型企业股权抓取新闻'
@@ -82,7 +103,7 @@ def dumpTJGQ():
     #print li.find('a').string.encode('utf8').strip()
     #print li.find('span').string
     result.append(['',subUrl+li.find('a').get('href').encode('utf8'),li.find('a').string.encode('utf8').strip(),li.find('span').string])
-  
+  #print result
   return result
 
 
@@ -206,7 +227,7 @@ def dumpGZGQ():
     title=li.find('a').string
     title=title.split(' ')
     result.append([title[0],subUrl+li.find('a').get('href'),title[1].encode('utf8'),li.find('span').string[1:11]])
-  
+  #print result
   return result
 
 
@@ -216,7 +237,7 @@ def dumpGZGQ():
 
 #抓取新闻
 def dumpNews():
-  dumpZXGZ()
+  dumpZXGQ()
   dumpSHGQ()
   dumpTJGQ()
   #print '开始抓取齐鲁'

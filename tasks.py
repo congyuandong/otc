@@ -143,6 +143,7 @@ def dump_industry():
 			comp[0].in_num=jscomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+			print '江苏挂牌更新成功！'
 	
 
 	'''
@@ -165,6 +166,7 @@ def dump_industry():
 			comp[0].in_num=gzcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+			print '广州挂牌更新成功！'
 
 	sxcomp=SXCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='山西'))
@@ -174,6 +176,7 @@ def dump_industry():
 			comp[0].in_num=sxcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+			print '山西挂牌更新成功'
 
 	lncomp=LNCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='辽宁'))
@@ -183,6 +186,7 @@ def dump_industry():
 			comp[0].in_num=lncomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+			print '辽宁挂牌更新成功！'
 
 	zjcomp=ZJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='浙江'))
@@ -192,6 +196,7 @@ def dump_industry():
 			comp[0].in_num=zjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
+			print '浙江挂牌更新成功！'
 #计算市场容量指数
 def anaIndustryIndex():
 	#假定2013年1月16日公司总数为3189家

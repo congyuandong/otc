@@ -135,14 +135,15 @@ def dump_industry():
 
 	jscomp=JSCOMP()
 	#print jscomp
-	comp=industry.objects.filter(in_region=region.objects.get(reg_name='江苏'))
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='江苏'))
 	if jscomp: 
-		if str(comp[0].in_num)!=jscomp:
+		if str(comp.in_num)!=jscomp:
 			print '更新江苏挂牌'
-			#print jscomp
-			comp[0].in_num=jscomp
-			comp[0].in_date=date.today()
-			comp[0].save()
+			print str(comp.in_num)
+			comp.in_num=jscomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
 			print '江苏挂牌更新成功！'
 	
 
@@ -159,43 +160,51 @@ def dump_industry():
 
 	'''
 	gzcomp=GZCOMP()
-	comp=industry.objects.filter(in_region=region.objects.get(reg_name='广州'))
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='广州'))
 	if gzcomp:
-		if str(comp[0].in_num)!=gzcomp:
+		if str(comp.in_num)!=gzcomp:
 			print '更新广州挂牌'
-			comp[0].in_num=gzcomp
-			comp[0].in_date=date.today()
-			comp[0].save()
+			print str(comp.in_num)
+			comp.in_num=gzcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
 			print '广州挂牌更新成功！'
 
 	sxcomp=SXCOMP()
-	comp=industry.objects.filter(in_region=region.objects.get(reg_name='山西'))
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='山西'))
 	if sxcomp:
-		if str(comp[0].in_num)!=sxcomp:
+		if str(comp.in_num)!=sxcomp:
 			print '更新山西挂牌'
-			comp[0].in_num=sxcomp
-			comp[0].in_date=date.today()
-			comp[0].save()
+			print str(comp.in_num)
+			comp.in_num=sxcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
 			print '山西挂牌更新成功'
 
 	lncomp=LNCOMP()
-	comp=industry.objects.filter(in_region=region.objects.get(reg_name='辽宁'))
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='辽宁'))
 	if lncomp:
-		if str(comp[0].in_num)!=lncomp:
+		if str(comp.in_num)!=lncomp:
 			print '更新辽宁挂牌'
-			comp[0].in_num=lncomp
-			comp[0].in_date=date.today()
-			comp[0].save()
+			print str(comp.in_num)
+			comp.in_num=lncomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
 			print '辽宁挂牌更新成功！'
 
 	zjcomp=ZJCOMP()
-	comp=industry.objects.filter(in_region=region.objects.get(reg_name='浙江'))
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='浙江'))
 	if zjcomp:
-		if str(comp[0].in_num)!=zjcomp:
+		if str(comp.in_num)!=zjcomp:
 			print '更新浙江挂牌'
-			comp[0].in_num=zjcomp
-			comp[0].in_date=date.today()
-			comp[0].save()
+			print str(comp.in_num)
+			comp.in_num=zjcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
 			print '浙江挂牌更新成功！'
 #计算市场容量指数
 def anaIndustryIndex():

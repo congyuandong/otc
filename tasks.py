@@ -3,7 +3,7 @@ import	sys,os
 from datetime import *
 from threading import Timer
 import time
-from tasks.dumpnews import *
+from tasks.dumpnews1 import *
 from tasks.dumpOtc import *
 from tasks.dumpOtc1 import *
 from tasks.dumpIndustry import *
@@ -26,35 +26,44 @@ def dump_otc_news():
 	print '抓取中小型企业新闻'
 	
 	zxgzNews = dumpZXGQ()
-	for new in zxgzNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1]
-		else:
-			print '已经存在数据',new[0],new[1]
+	if zxgzNews:
+		for new in zxgzNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1]
+			else:
+				print '已经存在数据',new[0],new[1]
+	else:
+		print '中小型抓取新闻失败2'
 	
 	
 	print '抓取上海新闻'
 	shgqNews = dumpSHGQ()
-	for new in shgqNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='上海'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1],new[2]
+	if shgqNews:
+		for new in shgqNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n = otc_new(new_region=region.objects.get(reg_name='上海'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1],new[2]
+	else:
+		print '上海新闻抓取失败2'
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
 	
 	print'抓取天津新闻'
 	tjgqNews = dumpTJGQ()
-	for new in tjgqNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='天津'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1],new[2]
+	if tjgqNews:
+		for new in tjgqNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n = otc_new(new_region=region.objects.get(reg_name='天津'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1],new[2]
+	else:
+		print '天津新闻抓取失败'
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
 	print'抓取齐鲁新闻'
@@ -71,40 +80,49 @@ def dump_otc_news():
 	'''	
 	print '抓取重庆新闻'
 	cqgqNews = dumpCQGQ()
-	for new in cqgqNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='重庆'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1],new[2]
+	if cqgqNews:
+		for new in cqgqNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n = otc_new(new_region=region.objects.get(reg_name='重庆'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1],new[2]
+	else:
+		print '重庆新闻抓取失败2'
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
-	'''
+	
 	print '抓取浙江新闻'
 	
 	zjgqNews = dumpZJGQ()
-	for new in zjgqNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n=otc_new(new_region=region.objects.get(reg_name='浙江'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1],new[2]
+	if zjgqNews:
+		for new in zjgqNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n=otc_new(new_region=region.objects.get(reg_name='浙江'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1],new[2]
+	else:
+		print '浙江新闻抓取失败2'
 		#else:
 		#	print '已经存在数据',new[0],new[1],new[2]
-	'''
+	
 	print '抓取广州新闻'
 	gzgqNews = dumpGZGQ()
-	for new in gzgqNews:
-		found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
-		if not found:
-			n = otc_new(new_region=region.objects.get(reg_name='广州'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
-			n.save()
-			print '存储数据',new[0],new[1],new[2]
+	if gzgqNews:
+		for new in gzgqNews:
+			found = otc_new.objects.filter(new_code=new[0],new_url=new[1],new_title=new[2])
+			if not found:
+				n = otc_new(new_region=region.objects.get(reg_name='广州'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
+				n.save()
+				print '存储数据',new[0],new[1],new[2]
+	else:
+		print '广州新闻抓取失败2'
 		#else:
 			#print '已经存在数据',new[0],new[1],new[2]
 
 def dump_industry():
-	'''
+	
 	tjcomp=TJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
 	if comp:
@@ -122,18 +140,18 @@ def dump_industry():
 		if str(comp[0].in_num)!=jscomp:
 			print '更新江苏挂牌'
 			#print jscomp
-			comp[0].in_num=int(jscomp)
+			comp[0].in_num=jscomp
 			comp[0].in_date=date.today()
 			comp[0].save()
-	'''
+	
 
 	xjcomp=XJCOMP()
-	print int(xjcomp)
+	#print int(xjcomp)
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))
 	if comp:
 		if str(comp[0].in_num)!=xjcomp:
 			print '更新新疆挂牌'
-			comp[0].in_num=int(xjcomp)
+			comp[0].in_num=xjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -142,7 +160,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=gzcomp:
 			print '更新广州挂牌'
-			comp[0].in_num=int(gzcomp)
+			comp[0].in_num=gzcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -151,7 +169,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=sxcomp:
 			print '更新山西挂牌'
-			comp[0].in_num=int(sxcomp)
+			comp[0].in_num=sxcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -160,7 +178,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=lncomp:
 			print '更新辽宁挂牌'
-			comp[0].in_num=int(lncomp)
+			comp[0].in_num=lncomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 
@@ -169,7 +187,7 @@ def dump_industry():
 	if comp:
 		if str(comp[0].in_num)!=zjcomp:
 			print '更新浙江挂牌'
-			comp[0].in_num=int(zjcomp)
+			comp[0].in_num=zjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
 #计算市场容量指数

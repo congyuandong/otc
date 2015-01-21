@@ -131,7 +131,7 @@ def dump_industry():
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()
 			comp[0].save()
-	'''
+	
 
 	jscomp=JSCOMP()
 	#print jscomp
@@ -147,7 +147,7 @@ def dump_industry():
 			print '江苏挂牌更新成功！'
 	
 
-	'''
+	
 	xjcomp=XJCOMP()
 	#print int(xjcomp)
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))

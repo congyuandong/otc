@@ -125,7 +125,7 @@ def dump_industry():
 	
 	tjcomp=TJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
-	if comp:
+	if tjcomp:
 		if str(comp[0].in_num)!=tjcomp:
 			print '更新天津挂牌'
 			comp[0].in_num=tjcomp
@@ -134,9 +134,9 @@ def dump_industry():
 	
 
 	jscomp=JSCOMP()
-	print jscomp
+	#print jscomp
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='江苏'))
-	if comp: 
+	if jscomp: 
 		if str(comp[0].in_num)!=jscomp:
 			print '更新江苏挂牌'
 			#print jscomp
@@ -148,7 +148,7 @@ def dump_industry():
 	xjcomp=XJCOMP()
 	#print int(xjcomp)
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='新疆'))
-	if comp:
+	if xjcomp:
 		if str(comp[0].in_num)!=xjcomp:
 			print '更新新疆挂牌'
 			comp[0].in_num=xjcomp
@@ -157,7 +157,7 @@ def dump_industry():
 
 	gzcomp=GZCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='广州'))
-	if comp:
+	if gzcomp:
 		if str(comp[0].in_num)!=gzcomp:
 			print '更新广州挂牌'
 			comp[0].in_num=gzcomp
@@ -166,7 +166,7 @@ def dump_industry():
 
 	sxcomp=SXCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='山西'))
-	if comp:
+	if sxcomp:
 		if str(comp[0].in_num)!=sxcomp:
 			print '更新山西挂牌'
 			comp[0].in_num=sxcomp
@@ -175,7 +175,7 @@ def dump_industry():
 
 	lncomp=LNCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='辽宁'))
-	if comp:
+	if lncomp:
 		if str(comp[0].in_num)!=lncomp:
 			print '更新辽宁挂牌'
 			comp[0].in_num=lncomp
@@ -184,7 +184,7 @@ def dump_industry():
 
 	zjcomp=ZJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='浙江'))
-	if comp:
+	if zjcomp:
 		if str(comp[0].in_num)!=zjcomp:
 			print '更新浙江挂牌'
 			comp[0].in_num=zjcomp
@@ -325,10 +325,10 @@ def anaOtcIndex():
 def runTasks():
 	print '开始抓取新闻'
 	dump_otc_news()
-	'''
+	
 	print '开始更新市场容量'
 	dump_industry()
-	'''
+	
 	print '开始抓取交易数据'
 	dump_otc()
 	print '开始计算市场容量指数'

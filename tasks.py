@@ -7,6 +7,7 @@ from tasks.dumpnews1 import *
 from tasks.dumpOtc import *
 from tasks.dumpOtc1 import *
 from tasks.dumpIndustry import *
+from tasks.dumpTotamount import *
 os.environ['DJANGO_SETTINGS_MODULE'] ='scrapy.settings'
 from django.conf import settings
 #from django.contrib.auth.models import User, check_password
@@ -33,8 +34,7 @@ def dump_otc_news():
 				n = otc_new(new_region=region.objects.get(reg_name='中小股转'),new_code=new[0],new_title=new[2],new_url=new[1],new_date=new[3])
 				n.save()
 				print '存储数据',new[0],new[1]
-			else:
-				print '已经存在数据',new[0],new[1]
+			
 	else:
 		print '中小型抓取新闻失败2'
 	
@@ -206,6 +206,23 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '浙江挂牌更新成功！'
+def dump_totamount():
+	otcs=dump_chinasee()
+	OTC_objs = OTC.objects.all()
+	for OTC_obj in OTC_objs:
+		if otcs.has_key(OTC_obj.otc_code):
+			if str(round(OTC_obj.otc_tot_amount,1))!=str(float(otcs[OTC_obj.otc_code])*10000):
+				print str(round(OTC_obj.otc_tot_amount,1))
+				OTC_obj.otc_tot_amount=str(float(otcs[OTC_obj.otc_code])*10000)
+				OTC_obj.save()
+				#print '更新成功'
+				#print OTC_obj.otc_name.encode('utf8')
+				print str(float(otcs[OTC_obj.otc_code])*10000)
+				print str(OTC_obj.otc_tot_amount)
+
+
+	#print otcs
+
 #计算市场容量指数
 def anaIndustryIndex():
 	#假定2013年1月16日公司总数为3189家
@@ -344,7 +361,8 @@ def runTasks():
 	
 	print '开始更新市场容量'
 	dump_industry()
-	
+	#print '开始更新总股本'
+	dump_totamount()
 	print '开始抓取交易数据'
 	dump_otc()
 	print '开始计算市场容量指数'

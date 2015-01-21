@@ -15,20 +15,25 @@ def ZXCOMP():
 
 
 def TJCOMP():
-	
+	num=''
 	url='http://www.tjsoc.com/web/default.aspx'
-	opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc = opener.open(url).read()
-	soup = BeautifulSoup(html_doc)
-	ul=soup.find('ul',style="text-align:left")
-	#div=div.find('div',class="datebase")
-	li=ul.find_all('li')[3]
-	num=li.find('span').string
+	try:
+		opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc = opener.open(url).read()
+		soup = BeautifulSoup(html_doc)
+		ul=soup.find('ul',style="text-align:left")
+		li=ul.find_all('li')[3]
+		num=li.find('span').string
+	except :
+		print '天津挂牌抓取失败'
+	
 	print num+'tianjin'
 	return num
 def QLCOMP():
 	#齐鲁挂牌
+	num=''
 	url='http://www.zbotc.com/'
+
 	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
 	html_doc=opener.open(url).read()
 	soup=BeautifulSoup(html_doc)
@@ -79,12 +84,16 @@ def JSCOMP():
 	'''
 	江苏挂牌
 	'''
+	num=''
 	url='http://www.jseec.com.cn/display/index.jhtml'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	div=soup.find('div',"pagination").find('div')
-	num=div.text.encode('utf8')[4:6]
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"pagination").find('div')
+		num=div.text.encode('utf8')[4:6]
+	except :
+		print '江苏挂牌抓取失败'
 	print num+'jiangsu'
 	return num
 
@@ -92,26 +101,34 @@ def GZCOMP():
 	'''
 	广州挂牌
 	'''
+	num=''
 	url='http://www.china-gee.com/frontpage/index.jsp'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	div=soup.find('div',"box")
-	li=div.find_all('li')[0]
-	num=li.string.encode('utf8')[15:19]
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"box")
+		li=div.find_all('li')[0]
+		num=li.string.encode('utf8')[15:19]
+	except :
+		print '广州挂牌抓取失败'
 	print num+'guangzhou'
 	return num
 def LNCOMP():
 	'''
 	辽宁挂牌
 	'''
+	num=''
 	url='http://www.clnee.com/center/index.jhtml?locale=zh_CN'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	div=soup.find('div',"market")
-	tr=div.find_all('tr')[0]
-	num=tr.find_all('td')[1].find('span').string
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"market")
+		tr=div.find_all('tr')[0]
+		num=tr.find_all('td')[1].find('span').string
+	except :
+		print '辽宁挂牌抓取失败'
 	print num+'liaoning'
 	return num
 
@@ -119,13 +136,17 @@ def XJCOMP():
 	'''
 	新疆挂牌
 	'''
+	num=''
 	url='http://www.casdaq.com.cn/'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	div=soup.find('div',"market-data-con")
-	li=div.find('ul').find_all('li')[4]
-	num=li.find('em').string
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"market-data-con")
+		li=div.find('ul').find_all('li')[4]
+		num=li.find('em').string
+	except :
+		print '新疆挂牌抓取失败'
 	print num+'xinjiang'
 	return num
 
@@ -147,15 +168,19 @@ def ZJCOMP():
 	'''
 	浙江挂牌
 	'''
+	num=''
 	url='http://www.zjex.com.cn/'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	div=soup.find('div',"contbox")
-	div=div.find('div',"datamap")
-	ul=div.find('ul',"fr")
-	li=ul.find_all('li')[0]
-	num=li.find_all('span')[1].string
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"contbox")
+		div=div.find('div',"datamap")
+		ul=div.find('ul',"fr")
+		li=ul.find_all('li')[0]
+		num=li.find_all('span')[1].string
+	except :
+		print '浙江挂牌抓取失败'
 	print num+'zhejiang'
 	return num
 def QHCOMP():
@@ -174,13 +199,17 @@ def SXCOMP():
 	'''
 	山西挂牌
 	'''
+	num=''
 	url ='http://www.sxgq.net/GQJYPT/index/gpqy_list.jsp'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	table=soup.find('table',height="94")
-	span=table.find_all('span')[0]
-	num=span.string
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		table=soup.find('table',height="94")
+		span=table.find_all('span')[0]
+		num=span.string
+	except :
+		print '山西挂牌抓取失败'
 	print num+'shanxi'
 	return num
 def dumpComp():

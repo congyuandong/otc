@@ -4,6 +4,7 @@ import sys,urllib2
 import urllib
 from unGzip import ContentEncodingProcessor
 from bs4 import BeautifulSoup
+from datetime import *
 import simplejson as json
 import ast,time
 
@@ -19,7 +20,7 @@ encoding_support = ContentEncodingProcessor()
 def dumpZXGQ():
   result=[]
   surl='http://file.neeq.com.cn/upload'
-  url='http://www.neeq.com.cn/controller/GetDisclosureannouncementPage?type=1&company_cd=&key=&subType=0&startDate=2014-12-22&endDate=2015-01-20&queryParams=0&page=1&_=1421744596585'
+  url='http://www.neeq.com.cn/controller/GetDisclosureannouncementPage?type=1&company_cd=&key=&subType=0&startDate=2014-12-22&endDate='+str(date.today())+'&queryParams=0&page=1&_=1421744596585'
   try:
     req=urllib2.Request(url)
     resp=urllib2.urlopen(req)

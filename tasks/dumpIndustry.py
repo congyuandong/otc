@@ -10,20 +10,32 @@ import ast,time
 encoding_support = ContentEncodingProcessor()
 
 def TJCOMP():
-	num=''
+	num=0
 	print '天津挂牌抓取'
-	url='http://www.tjsoc.com/web/default.aspx'
+	url='http://www.tjsoc.com/web/infor.aspx?cid=2&pages=1'
 	try:
 		req = urllib2.Request(url)
 		resp = urllib2.urlopen(req)
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
-		ul=soup.find('ul',style="text-align:left")
-		li=ul.find_all('li')[3]
-		num=li.find('span').string
+		div=soup.find('div',"box1").find('div',"page")
+		print div.text.encode('utf8')[44:46]
+		num1=div.text.encode('utf8')[44:46]
 	except :
 		print '天津挂牌抓取失败'
-	
+	try:
+		suburl='http://www.tjsoc.com/web/infor.aspx?cid=2&pages='+num1
+		req = urllib2.Request(suburl)
+		resp = urllib2.urlopen(req)
+		respHtml = resp.read()
+		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		div=soup.find('div',"box1")
+		trs=div.find_all('tr')
+		num2=len(trs)-1
+		print num2
+	except :
+		print '天津挂牌抓取失败'
+	num=(int(num1)-1)*12+num2
 	print num
 	return num
 def QLCOMP():
@@ -146,6 +158,8 @@ def XJCOMP():
 	'''
 	print '新疆挂牌抓取'
 	num=''
+	'''
+	要抓取的数据在这个url里没了
 	url='http://www.casdaq.com.cn/'
 	try:
 		req = urllib2.Request(url)
@@ -153,8 +167,22 @@ def XJCOMP():
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find('div',"market-data-con")
+		print div
 		li=div.find('ul').find_all('li')[4]
 		num=li.find('em').string
+	except :
+		print '新疆挂牌抓取失败'
+	'''
+	url='http://www.casdaq.com.cn/display/index.jhtml'
+	try:
+		req = urllib2.Request(url)
+		resp = urllib2.urlopen(req)
+		respHtml = resp.read()
+		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		div=soup.find('div',"pagination").find('div')
+		num=div.text.encode('utf8')[5:8]
+		#num=div.text.encode('utf8')[4:7]
+		#print num
 	except :
 		print '新疆挂牌抓取失败'
 	print num
@@ -302,7 +330,7 @@ def SHCOMP():
 	上海挂牌
 	'''
 	print '上海挂牌抓取'
-	
+	num=0
 	url ='http://www.china-see.com/index.do'
 	try:
 		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
@@ -339,7 +367,6 @@ def ZXCOMP():
 	return num
 def dumpComp():
 	'''
-	TJCOMP()
 	JSCOMP()
 	GZCOMP()
 	LNCOMP()
@@ -355,6 +382,7 @@ def dumpComp():
 	SHCOMP()
 	ZXCOMP()
 	'''
+	TJCOMP()
 	XJCOMP()
 	AHCOMP()
 if __name__ == '__main__':

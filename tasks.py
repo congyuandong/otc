@@ -126,7 +126,7 @@ def dump_industry():
 	tjcomp=TJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
 	if tjcomp:
-		if str(comp[0].in_num)!=tjcomp:
+		if str(comp[0].in_num)!=str(tjcomp):
 			print '更新天津挂牌'
 			comp[0].in_num=tjcomp
 			comp[0].in_date=date.today()

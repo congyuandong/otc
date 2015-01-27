@@ -102,6 +102,7 @@ def JSCOMP():
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find('div',"pagination").find('div')
 		num=div.text.encode('utf8')[5:7]
+		#num=div.text.encode('utf8')[4:6]
 	except :
 		print '江苏挂牌抓取失败'
 	print num
@@ -249,6 +250,24 @@ def SXCOMP():
 		print '山西挂牌抓取失败'
 	print num
 	return num
+def BJCOMP():
+	'''
+	北京挂牌
+	'''
+	print '北京挂牌抓取'
+	num=''
+	url ='http://www.bjotc.cn/tradedComShow.jhtml'
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"fy")
+		#num=div.text.encode('utf8')[4:7]
+		num=div.text.encode('utf8')[5:8]
+	except :
+		print '北京挂牌抓取失败'
+	print num
+	return num
 def dumpComp():
 	
 	TJCOMP()
@@ -260,11 +279,10 @@ def dumpComp():
 	ZJCOMP()
 	QHCOMP()
 	SXCOMP()
-	
-
 	#GSCOMP()
 	QLCOMP()
 	WHCOMP()
+	BJCOMP()
 if __name__ == '__main__':
 	dumpComp()
 

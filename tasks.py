@@ -197,7 +197,7 @@ def dump_industry():
 	
 	qlcomp=QLCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='齐鲁'))
-	if sxcomp:
+	if qlcomp:
 		if str(comp.in_num)!=qlcomp:
 			print '更新齐鲁挂牌'
 			print str(comp.in_num)
@@ -230,6 +230,17 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '浙江挂牌更新成功！'
+	bjcomp=BJCOMP()
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='北京'))
+	if bjcomp:
+		if str(comp.in_num)!=bjcomp:
+			print '更新北京挂牌'
+			print str(comp.in_num)
+			comp.in_num=bjcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
+			print '北京挂牌更新成功！'
 def dump_totamount():
 	otcs=dump_chinasee()
 	OTC_objs = OTC.objects.all()

@@ -37,7 +37,7 @@ def TJCOMP():
 		print num2
 		num=(int(num1)-1)*12+int(num2)
 	except :
-		print '天津挂牌抓取失败'
+		print '天津挂牌抓取失败2'
 	
 	print num
 	return num
@@ -385,7 +385,7 @@ def dumpComp():
 	SHCOMP()
 	ZXCOMP()
 	'''
-	TJCOMP()
+	#TJCOMP()
 	XJCOMP()
 	AHCOMP()
 if __name__ == '__main__':

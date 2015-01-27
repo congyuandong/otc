@@ -340,11 +340,9 @@ def ZXCOMP():
 def dumpComp():
 	'''
 	TJCOMP()
-	
 	JSCOMP()
 	GZCOMP()
 	LNCOMP()
-	XJCOMP()
 	ZJCOMP()
 	QHCOMP()
 	SXCOMP()
@@ -357,6 +355,7 @@ def dumpComp():
 	SHCOMP()
 	ZXCOMP()
 	'''
+	XJCOMP()
 	AHCOMP()
 if __name__ == '__main__':
 	dumpComp()

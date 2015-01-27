@@ -18,7 +18,9 @@ def TJCOMP():
 		resp = urllib2.urlopen(req)
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		print 'haha1'
 		div=soup.find('div',"box1").find('div',"page")
+		print 'hhaha2'
 		print div.text.encode('utf8')[44:46]
 		num1=div.text.encode('utf8')[44:46]
 	except :
@@ -33,9 +35,10 @@ def TJCOMP():
 		trs=div.find_all('tr')
 		num2=len(trs)-1
 		print num2
+		num=(int(num1)-1)*12+int(num2)
 	except :
 		print '天津挂牌抓取失败'
-	num=(int(num1)-1)*12+num2
+	
 	print num
 	return num
 def QLCOMP():

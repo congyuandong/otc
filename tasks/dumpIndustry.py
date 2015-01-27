@@ -101,7 +101,7 @@ def JSCOMP():
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find('div',"pagination").find('div')
-		num=div.text.encode('utf8')[4:6]
+		num=div.text.encode('utf8')[0:6]
 	except :
 		print '江苏挂牌抓取失败'
 	print num

@@ -286,8 +286,48 @@ def HXCOMP():
 		print '海峡挂牌抓取失败'
 	print num
 	return num
-def dumpComp():
+def CQCOMP():
+	'''
+	重庆挂牌
+	'''
+	print '重庆挂牌抓取'
+	num=''
 	
+	url ='http://www.chn-cstc.com/'+'信息披露/分市场披露'+'/tabid/136/language/zh-CN/Default.aspx'
+	#url=unicode(url,'gb2312')
+	url=url.encode('utf8')
+	req = urllib2.Request(url)
+	resp = urllib2.urlopen(req)
+	respHtml = resp.read()
+	soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+	print num
+	return num
+def SHCOMP():
+	'''
+	上海挂牌
+	'''
+	print '上海挂牌抓取'
+	
+	url ='http://www.china-see.com/index.do'
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"DWrapConRSub1")
+		dd1=div.find_all('dl')[0].find('dd')
+		dd2=div.find_all('dl')[1].find('dd')
+		num1=dd1.text[0:-1]
+		num2=dd2.text[0:-1]
+		
+	except :
+		print '上海挂牌抓取失败'
+	print num1
+	print num2
+	num=int(num1)+int(num2)
+	print num
+	return num
+def dumpComp():
+	'''
 	TJCOMP()
 	AHCOMP()
 	JSCOMP()
@@ -302,7 +342,9 @@ def dumpComp():
 	WHCOMP()
 	BJCOMP()
 	HXCOMP()
-
+	#CQCOMP()
+	'''
+	SHCOMP()
 if __name__ == '__main__':
 	dumpComp()
 

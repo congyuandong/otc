@@ -264,6 +264,18 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '上海挂牌更新成功！'
+	ahcomp=AHCOMP()
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='安徽'))
+	if ahcomp:
+		if str(comp.in_num)!=ahcomp:
+			print '更新安徽挂牌'
+			print str(comp.in_num)
+			comp.in_num=ahcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
+			print '安徽挂牌更新成功！'
+
 
 def dump_totamount():
 	otcs=dump_chinasee()

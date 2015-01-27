@@ -8,11 +8,6 @@ import simplejson as json
 import ast,time
 
 encoding_support = ContentEncodingProcessor()
-#中小型挂牌数量
-def ZXCOMP():
-	
-	url='http://www.neeq.cc/listing'
-
 
 def TJCOMP():
 	num=''
@@ -75,19 +70,19 @@ def AHCOMP():
 	#安徽挂牌
 	num=''
 	print '安徽挂牌抓取'
-	url='http://www.ahsgq.com/aee/index.html'
-	opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-	html_doc=opener.open(url).read()
-	soup=BeautifulSoup(html_doc)
-	ul=soup.find('ul',"right_top")
-	#print ul
-	li=ul.find_all('li')[0]
-	strong=li.find('span').find('strong')
-	'''
-	strong中没有内容
-	'''
-	num=strong.string
+	try:
+		url='http://www.ahsgq.com/aee/hqsj/scsj.jsp?classid=000100060006'
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"zpyyb")
+		tr=div.find_all('tr')[0]
+		td=tr.find_all('td')[0]
+		num=td.string[0:-1]
+	except :
+		print '安徽挂牌抓取失败！'
 	print num
+	return num
 def JSCOMP():
 	'''
 	江苏挂牌
@@ -326,10 +321,26 @@ def SHCOMP():
 	num=int(num1)+int(num2)
 	print num
 	return num
+def ZXCOMP():
+	'''
+	中小型企业挂牌
+	'''
+	print '中小型企业挂牌抓取'
+	num=''
+	url ='http://www.neeq.cc/listingNew'
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		
+	except :
+		print '中小型企业挂牌抓取失败'
+	print num
+	return num
 def dumpComp():
 	'''
 	TJCOMP()
-	AHCOMP()
+	
 	JSCOMP()
 	GZCOMP()
 	LNCOMP()
@@ -343,8 +354,10 @@ def dumpComp():
 	BJCOMP()
 	HXCOMP()
 	#CQCOMP()
-	'''
 	SHCOMP()
+	ZXCOMP()
+	'''
+	AHCOMP()
 if __name__ == '__main__':
 	dumpComp()
 

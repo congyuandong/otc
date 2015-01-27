@@ -122,7 +122,7 @@ def dump_otc_news():
 			#print '已经存在数据',new[0],new[1],new[2]
 
 def dump_industry():
-	'''
+	
 	tjcomp=TJCOMP()
 	comp=industry.objects.filter(in_region=region.objects.get(reg_name='天津'))
 	if tjcomp:
@@ -158,7 +158,7 @@ def dump_industry():
 			comp[0].in_date=date.today()
 			comp[0].save()
 
-	'''
+	
 	gzcomp=GZCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='广州'))
 	if gzcomp:
@@ -171,6 +171,18 @@ def dump_industry():
 			comp.save()
 			print '广州挂牌更新成功！'
 
+	whcomp=WHCOMP()
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='武汉'))
+	if whcomp:
+		if str(comp.in_num)!=whcomp:
+			print '更新武汉挂牌'
+			print str(comp.in_num)
+			comp.in_num=whcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
+			print '武汉挂牌更新成功！'
+	
 	sxcomp=SXCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='山西'))
 	if sxcomp:
@@ -182,6 +194,18 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '山西挂牌更新成功'
+	
+	qlcomp=QLCOMP()
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='齐鲁'))
+	if sxcomp:
+		if str(comp.in_num)!=qlcomp:
+			print '更新齐鲁挂牌'
+			print str(comp.in_num)
+			comp.in_num=qlcomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
+			print '齐鲁挂牌更新成功'
 
 	lncomp=LNCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='辽宁'))
@@ -216,7 +240,7 @@ def dump_totamount():
 				OTC_obj.otc_tot_amount=str(float(otcs[OTC_obj.otc_code])*10000)
 				OTC_obj.save()
 				#print '更新成功'
-				#print OTC_obj.otc_name.encode('utf8')
+				print OTC_obj.otc_name.encode('utf8')+'更新成功'
 				print str(float(otcs[OTC_obj.otc_code])*10000)
 				print str(OTC_obj.otc_tot_amount)
 

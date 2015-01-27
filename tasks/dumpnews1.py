@@ -179,21 +179,6 @@ def dumpCQGQ():
   
   except :
     print '重庆新闻抓取失败1'
-  '''
-  opener = urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
-  html_doc = opener.open(url).read()
-  soup = BeautifulSoup(html_doc)
-  table=soup.find('table',width="709")
-  table=table.find_all('table')[1]
-  td=table.find('tr').find('td',colspan="2")
-  td=td.find('tr').find('td')
-  table=td.find_all('table')[0]
-  trs=table.find_all('tr')
-  for tr in trs:
-    tds=tr.find_all('td')
-    title=tds[0].find('a').string
-    result.append([title[1:7],tds[0].find('a').get('href').encode('utf8'),title[7:].encode('utf8'),tds[1].string[0:10]])
-  '''
   return result
 #抓取安徽股权
 #主要URL  http://www.ahsgq.com/

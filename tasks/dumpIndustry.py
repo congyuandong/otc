@@ -268,6 +268,24 @@ def BJCOMP():
 		print '北京挂牌抓取失败'
 	print num
 	return num
+def HXCOMP():
+	'''
+	海峡挂牌
+	'''
+	print '海峡挂牌抓取'
+	num=''
+	url ='http://www.hxee.com.cn/Html/gbqyzq/'
+	try:
+		opener=urllib2.build_opener(encoding_support,urllib2.HTTPHandler)
+		html_doc=opener.open(url).read()
+		soup=BeautifulSoup(html_doc)
+		div=soup.find('div',"pageList_nav")
+		b=div.find_all('b')[2]
+		num=b.text
+	except :
+		print '海峡挂牌抓取失败'
+	print num
+	return num
 def dumpComp():
 	
 	TJCOMP()
@@ -283,6 +301,8 @@ def dumpComp():
 	QLCOMP()
 	WHCOMP()
 	BJCOMP()
+	HXCOMP()
+
 if __name__ == '__main__':
 	dumpComp()
 

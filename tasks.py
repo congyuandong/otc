@@ -122,7 +122,7 @@ def dump_otc_news():
 			#print '已经存在数据',new[0],new[1],new[2]
 
 def dump_industry():
-	
+	'''
 	tjcomp=TJCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='天津'))
 	if tjcomp:
@@ -132,23 +132,6 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print comp.in_num
-	
-
-	jscomp=JSCOMP()
-	#print jscomp
-	comp=industry.objects.get(in_region=region.objects.get(reg_name='江苏'))
-	if jscomp: 
-		if str(comp.in_num)!=jscomp:
-			print '更新江苏挂牌'
-			print str(comp.in_num)
-			comp.in_num=jscomp
-			print str(comp.in_num)
-			comp.in_date=date.today()
-			comp.save()
-			print '江苏挂牌更新成功！'
-	
-
-	
 	xjcomp=XJCOMP()
 	#print int(xjcomp)
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='新疆'))
@@ -162,6 +145,22 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print comp.in_num
+	'''
+	jscomp=JSCOMP()
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='江苏'))
+	if jscomp: 
+		if str(comp.in_num)!=jscomp:
+			print '更新江苏挂牌'
+			print str(comp.in_num)
+			comp.in_num=jscomp
+			print str(comp.in_num)
+			comp.in_date=date.today()
+			comp.save()
+			print '江苏挂牌更新成功！'
+	
+
+	
+	
 
 	
 	gzcomp=GZCOMP()
@@ -269,6 +268,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '上海挂牌更新成功！'
+	'''
 	ahcomp=AHCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='安徽'))
 	if ahcomp:
@@ -280,7 +280,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '安徽挂牌更新成功！'
-	'''
+	
 	cqcomp=CQCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='重庆'))
 	if cqcomp:

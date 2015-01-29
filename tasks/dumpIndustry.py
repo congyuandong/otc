@@ -163,6 +163,7 @@ def XJCOMP():
 	num=''
 	'''
 	要抓取的数据在这个url里没了
+	'''
 	url='http://www.casdaq.com.cn/'
 	try:
 		req = urllib2.Request(url)
@@ -170,7 +171,7 @@ def XJCOMP():
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find('div',"market-data-con")
-		print div
+		#print div
 		li=div.find('ul').find_all('li')[4]
 		num=li.find('em').string
 	except :
@@ -183,11 +184,12 @@ def XJCOMP():
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find('div',"pagination").find('div')
-		num=div.text.encode('utf8')[5:8]
-		#num=div.text.encode('utf8')[4:7]
+		#num=div.text.encode('utf8')[5:8]
+		num=div.text.encode('utf8')[4:7]
 		#print num
 	except :
 		print '新疆挂牌抓取失败'
+	'''
 	print num
 	return num
 
@@ -197,33 +199,22 @@ def GSCOMP():
 	'''
 	num=''
 	print '甘肃挂牌抓取'
-	url='http://www.gsotc.com.cn/main/home/index.shtml'
-	'''
+	url='http://www.gsotc.com.cn/main/research/scsj/index.shtml'
+	
 	try:
 		req = urllib2.Request(url)
 		resp = urllib2.urlopen(req)
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
-		div=soup.find('div',"index_right").find('div',"tablebox")
-		tr=div.find('table').find_all('tr')[0]
-		print tr
-		num=tr.find('td').string
+		div=soup.find('div',"content")
+		div=div.find('div',"blueinner")
+		li=div.find_all('li')[0]
+		em=li.find('em')
+		num=em.string[0:-2]
 	except :
 		print '甘肃挂牌抓取失败'
-	'''
-	req = urllib2.Request(url)
-	resp = urllib2.urlopen(req)
-	respHtml = resp.read()
-	soup = BeautifulSoup(respHtml, from_encoding='utf-8')
-	#print soup.encode('utf8')
-	div=soup.find('table')[0]
-	print div
-	#div=div1.find('div',"index_right")
-	#print div
-	tr=div.find('table').find_all('tr')[0]
-	print tr
-	num=tr.find('td').string
 	print num
+	return num
 def ZJCOMP():
 	'''
 	浙江挂牌
@@ -249,15 +240,20 @@ def QHCOMP():
 	前海挂牌
 	'''
 	print '前海挂牌抓取'
-	url='https://www.qhee.com/'
-	req = urllib2.Request(url)
-	resp = urllib2.urlopen(req)
-	respHtml = resp.read()
-	soup = BeautifulSoup(respHtml, from_encoding='utf-8')
-	div=soup.find_all('div',"binder-open-url")[0]
-	div=div.find('div')
-	num=div.string
-	print num
+	try:
+		url='https://www.qhee.com/'
+		req = urllib2.Request(url)
+		resp = urllib2.urlopen(req)
+		respHtml = resp.read()
+		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		div=soup.find_all('div',"binder-open-url")[1]
+		dl=div.find_all('dl')[0]
+		num=dl.find('dd').text
+		print num
+	except :
+		print '前海挂牌抓取失败'
+	return num
+	
 def SXCOMP():
 	'''
 	山西挂牌
@@ -317,15 +313,31 @@ def CQCOMP():
 	重庆挂牌
 	'''
 	print '重庆挂牌抓取'
-	num=''
+	num=0
+	try:
+		url1 ='http://www.chn-cstc.com/信息披露/分市场披露/tabid/136/language/zh-CN/Default.aspx'
+		url1=url1.decode('utf8').encode('gb2312')
+		req = urllib2.Request(url1)
+		resp = urllib2.urlopen(req)
+		respHtml = resp.read()
+		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		table=soup.find('table',"PagingTable")
+		num1=table.text.encode('utf8')[21:22]
+		print num1
+		url2='http://www.chn-cstc.com/%E4%BF%A1%E6%81%AF%E6%8A%AB%E9%9C%B2/%E5%88%86%E5%B8%82%E5%9C%BA%E6%8A%AB%E9%9C%B2/tabid/136/currentpage/'+num1+'/language/zh-CN/Default.aspx'
+		req = urllib2.Request(url2)
+		resp = urllib2.urlopen(req)
+		respHtml = resp.read()
+		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+		div=soup.find('div',"NewsArticles")
+		tables=div.find_all('table')
+		num2=len(tables)-1
+		print num2
+		num=(int(num1)-1)*20+num2
+	except :
+		print '重庆挂牌抓取失败'
 	
-	url ='http://www.chn-cstc.com/'+'信息披露/分市场披露'+'/tabid/136/language/zh-CN/Default.aspx'
-	#url=unicode(url,'gb2312')
-	url=url.encode('utf8')
-	req = urllib2.Request(url)
-	resp = urllib2.urlopen(req)
-	respHtml = resp.read()
-	soup = BeautifulSoup(respHtml, from_encoding='utf-8')
+	num=(int(num1)-1)*20+num2
 	print num
 	return num
 def SHCOMP():
@@ -374,20 +386,24 @@ def dumpComp():
 	GZCOMP()
 	LNCOMP()
 	ZJCOMP()
-	QHCOMP()
 	SXCOMP()
-	#GSCOMP()
+	
 	QLCOMP()
 	WHCOMP()
 	BJCOMP()
 	HXCOMP()
-	#CQCOMP()
+	
 	SHCOMP()
 	ZXCOMP()
-	'''
-	#TJCOMP()
-	XJCOMP()
+	QHCOMP()
+	
 	AHCOMP()
+	
+	XJCOMP()
+	TJCOMP()
+	CQCOMP()
+	'''
+	GSCOMP()
 if __name__ == '__main__':
 	dumpComp()
 

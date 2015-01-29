@@ -280,6 +280,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '安徽挂牌更新成功！'
+	'''
 	cqcomp=CQCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='重庆'))
 	if cqcomp:
@@ -291,7 +292,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '重庆挂牌更新成功！'
-	
+	'''
 	gscomp=GSCOMP()
 	print gscomp
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='甘肃'))

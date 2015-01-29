@@ -401,9 +401,11 @@ def dumpComp():
 	
 	XJCOMP()
 	TJCOMP()
-	CQCOMP()
+	
 	'''
 	GSCOMP()
+	CQCOMP()
+	
 if __name__ == '__main__':
 	dumpComp()
 

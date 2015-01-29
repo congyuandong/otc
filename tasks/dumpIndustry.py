@@ -23,8 +23,10 @@ def TJCOMP():
 		print 'hhaha2'
 		print div.text.encode('utf8')[44:46]
 		num1=div.text.encode('utf8')[44:46]
-	except :
+	except Exception, e:
 		print '天津挂牌抓取失败'
+		raise e
+		print e
 	try:
 		suburl='http://www.tjsoc.com/web/infor.aspx?cid=2&pages='+num1
 		req = urllib2.Request(suburl)
@@ -94,8 +96,10 @@ def AHCOMP():
 		tr=div.find_all('tr')[0]
 		td=tr.find_all('td')[0]
 		num=td.string[0:-1]
-	except :
+	except Exception, e:
 		print '安徽挂牌抓取失败！'
+		raise e
+		print e
 	print num
 	return num
 def JSCOMP():
@@ -174,8 +178,10 @@ def XJCOMP():
 		#print div
 		li=div.find('ul').find_all('li')[4]
 		num=li.find('em').string
-	except :
+	except Exception, e:
 		print '新疆挂牌抓取失败'
+		print e
+		raise e
 	'''
 	url='http://www.casdaq.com.cn/display/index.jhtml'
 	try:
@@ -334,10 +340,10 @@ def CQCOMP():
 		num2=len(tables)-1
 		print num2
 		num=(int(num1)-1)*20+num2
-	except :
+	except Exception e:
 		print '重庆挂牌抓取失败'
-	
-	num=(int(num1)-1)*20+num2
+		raise e
+		print e
 	print num
 	return num
 def SHCOMP():

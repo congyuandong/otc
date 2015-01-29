@@ -387,23 +387,18 @@ def dumpComp():
 	LNCOMP()
 	ZJCOMP()
 	SXCOMP()
-	
 	QLCOMP()
 	WHCOMP()
 	BJCOMP()
 	HXCOMP()
-	
 	SHCOMP()
 	ZXCOMP()
 	QHCOMP()
-	
-	AHCOMP()
-	
-	XJCOMP()
-	TJCOMP()
-	
-	'''
 	GSCOMP()
+	'''
+	TJCOMP()
+	XJCOMP()
+	AHCOMP()
 	CQCOMP()
 	
 if __name__ == '__main__':

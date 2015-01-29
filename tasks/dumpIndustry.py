@@ -210,7 +210,7 @@ def GSCOMP():
 		div=div.find('div',"blueinner")
 		li=div.find_all('li')[0]
 		em=li.find('em')
-		num=em.string[0:-2]
+		num=em.string[0:-1]
 	except :
 		print '甘肃挂牌抓取失败'
 	print num

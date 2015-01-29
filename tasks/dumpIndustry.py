@@ -340,7 +340,7 @@ def CQCOMP():
 		num2=len(tables)-1
 		print num2
 		num=(int(num1)-1)*20+num2
-	except Exception e:
+	except Exception, e:
 		print '重庆挂牌抓取失败'
 		raise e
 		print e

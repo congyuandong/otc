@@ -23,10 +23,8 @@ def TJCOMP():
 		print 'hhaha2'
 		print div.text.encode('utf8')[44:46]
 		num1=div.text.encode('utf8')[44:46]
-	except Exception, e:
+	except :
 		print '天津挂牌抓取失败'
-		raise e
-		print e
 	try:
 		suburl='http://www.tjsoc.com/web/infor.aspx?cid=2&pages='+num1
 		req = urllib2.Request(suburl)
@@ -38,10 +36,9 @@ def TJCOMP():
 		num2=len(trs)-1
 		print num2
 		num=(int(num1)-1)*12+int(num2)
+		print num
 	except :
 		print '天津挂牌抓取失败2'
-	
-	print num
 	return num
 def QLCOMP():
 	#齐鲁挂牌
@@ -58,9 +55,9 @@ def QLCOMP():
 		font=tr.find('font')
 		br=font.find_all('br')
 		num=font.text.encode('utf8')[19:22]
+		print num
 	except :
 		print '齐鲁挂牌抓取失败！'
-	print num
 	return num
 
 def WHCOMP():
@@ -78,9 +75,9 @@ def WHCOMP():
 		ul=div.find('ul')
 		li=ul.find_all('li')[2]
 		num=li.find('span').string[0:-1]
+		print num
 	except :
 		print '武汉挂牌抓取失败'
-	print num
 	return num
 
 def AHCOMP():
@@ -96,11 +93,9 @@ def AHCOMP():
 		tr=div.find_all('tr')[0]
 		td=tr.find_all('td')[0]
 		num=td.string[0:-1]
-	except Exception, e:
+		print num
+	except :
 		print '安徽挂牌抓取失败！'
-		raise e
-		print e
-	print num
 	return num
 def JSCOMP():
 	'''
@@ -117,9 +112,9 @@ def JSCOMP():
 		div=soup.find('div',"pagination").find('div')
 		num=div.text.encode('utf8')[5:7]
 		#num=div.text.encode('utf8')[4:6]
+		print num
 	except :
 		print '江苏挂牌抓取失败'
-	print num
 	return num
 
 def GZCOMP():
@@ -136,9 +131,9 @@ def GZCOMP():
 		div=soup.find('div',"box")
 		li=div.find_all('li')[0]
 		num=li.string.encode('utf8')[15:19]
+		print num
 	except :
 		print '广州挂牌抓取失败'
-	print num
 	return num
 def LNCOMP():
 	'''
@@ -154,9 +149,9 @@ def LNCOMP():
 		div=soup.find('div',"market")
 		tr=div.find_all('tr')[0]
 		num=tr.find_all('td')[1].find('span').string
+		print num
 	except :
 		print '辽宁挂牌抓取失败'
-	print num
 	return num
 
 def XJCOMP():
@@ -178,10 +173,9 @@ def XJCOMP():
 		#print div
 		li=div.find('ul').find_all('li')[4]
 		num=li.find('em').string
-	except Exception, e:
+		print num
+	except :
 		print '新疆挂牌抓取失败'
-		print e
-		raise e
 	'''
 	url='http://www.casdaq.com.cn/display/index.jhtml'
 	try:
@@ -196,7 +190,6 @@ def XJCOMP():
 	except :
 		print '新疆挂牌抓取失败'
 	'''
-	print num
 	return num
 
 def GSCOMP():
@@ -216,10 +209,11 @@ def GSCOMP():
 		div=div.find('div',"blueinner")
 		li=div.find_all('li')[0]
 		em=li.find('em')
+		#num=em.string[0:-2]
 		num=em.string[0:-1]
+		print num
 	except :
 		print '甘肃挂牌抓取失败'
-	print num
 	return num
 def ZJCOMP():
 	'''
@@ -237,14 +231,16 @@ def ZJCOMP():
 		ul=div.find('ul',"fr")
 		li=ul.find_all('li')[0]
 		num=li.find_all('span')[1].string
+		print num
 	except :
 		print '浙江挂牌抓取失败'
-	print num
+	
 	return num
 def QHCOMP():
 	'''
 	前海挂牌
 	'''
+	num=''
 	print '前海挂牌抓取'
 	try:
 		url='https://www.qhee.com/'
@@ -254,8 +250,8 @@ def QHCOMP():
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find_all('div',"binder-open-url")[1]
 		dl=div.find_all('dl')[0]
-		num=dl.find('dd').text
-		print num
+		num=dl.find('dd').text.replace(" ","").strip('\n')
+		print int(num)
 	except :
 		print '前海挂牌抓取失败'
 	return num
@@ -274,9 +270,9 @@ def SXCOMP():
 		table=soup.find('table',height="94")
 		span=table.find_all('span')[0]
 		num=span.string
+		print num
 	except :
 		print '山西挂牌抓取失败'
-	print num
 	return num
 def BJCOMP():
 	'''
@@ -292,9 +288,10 @@ def BJCOMP():
 		div=soup.find('div',"fy")
 		#num=div.text.encode('utf8')[4:7]
 		num=div.text.encode('utf8')[5:8]
+		print num
 	except :
 		print '北京挂牌抓取失败'
-	print num
+	
 	return num
 def HXCOMP():
 	'''
@@ -340,10 +337,8 @@ def CQCOMP():
 		num2=len(tables)-1
 		print num2
 		num=(int(num1)-1)*20+num2
-	except Exception, e:
+	except :
 		print '重庆挂牌抓取失败'
-		raise e
-		print e
 	print num
 	return num
 def SHCOMP():
@@ -399,9 +394,9 @@ def dumpComp():
 	HXCOMP()
 	SHCOMP()
 	ZXCOMP()
-	QHCOMP()
-	GSCOMP()
 	'''
+	GSCOMP()
+	QHCOMP()
 	TJCOMP()
 	XJCOMP()
 	AHCOMP()

@@ -305,6 +305,23 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '甘肃挂牌更新成功！'
+
+	qhcomp=QHCOMP()
+	f=open('num.txt')
+	qhcompold=f.readline()
+	print qhcompold
+	comp=industry.objects.get(in_region=region.objects.get(reg_name='前海'))
+	if qhcomp:
+		if qhcompold!=qhcomp:
+			print '更新前海挂牌'
+			print str(comp.in_num)
+			comp.in_num=comp.in_num+int(qhcomp)-int(qhcompold)
+			f=file('num.txt','w')
+			f.write(qhcomp)
+			print open('num.txt').readline()
+			comp.in_date=date.today()
+			comp.save()
+			print '前海挂牌更新成功！'
 	
 
 

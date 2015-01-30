@@ -249,7 +249,7 @@ def QHCOMP():
 		respHtml = resp.read()
 		soup = BeautifulSoup(respHtml, from_encoding='utf-8')
 		div=soup.find_all('div',"binder-open-url")[1]
-		dl=div.find_all('dl')[0]
+		dl=div.find_all('dl')[2]
 		num=dl.find('dd').text.replace(" ","").strip('\n')
 		print int(num)
 	except :
@@ -394,13 +394,15 @@ def dumpComp():
 	HXCOMP()
 	SHCOMP()
 	ZXCOMP()
-	'''
-	GSCOMP()
-	QHCOMP()
 	TJCOMP()
 	XJCOMP()
 	AHCOMP()
 	CQCOMP()
+	GSCOMP()
+	'''
+	
+	QHCOMP()
+	
 	
 if __name__ == '__main__':
 	dumpComp()

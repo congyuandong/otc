@@ -132,6 +132,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print comp.in_num
+	'''
 	xjcomp=XJCOMP()
 	#print int(xjcomp)
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='新疆'))
@@ -145,7 +146,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print comp.in_num
-	'''
+	
 	jscomp=JSCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='江苏'))
 	if jscomp: 
@@ -280,7 +281,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '安徽挂牌更新成功！'
-	
+	'''
 	cqcomp=CQCOMP()
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='重庆'))
 	if cqcomp:
@@ -292,7 +293,7 @@ def dump_industry():
 			comp.in_date=date.today()
 			comp.save()
 			print '重庆挂牌更新成功！'
-	'''
+	
 	gscomp=GSCOMP()
 	print gscomp
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='甘肃'))
@@ -312,17 +313,21 @@ def dump_industry():
 	print qhcompold
 	comp=industry.objects.get(in_region=region.objects.get(reg_name='前海'))
 	if qhcomp:
-		if qhcompold!=qhcomp:
+		if int(qhcompold)<int(qhcomp):
 			print '更新前海挂牌'
 			print str(comp.in_num)
 			comp.in_num=comp.in_num+int(qhcomp)-int(qhcompold)
 			f=file('num.txt','w')
 			f.write(qhcomp)
-			print open('num.txt').readline()
 			comp.in_date=date.today()
 			comp.save()
 			print '前海挂牌更新成功！'
-	
+		if int(qhcompold)>int(qhcomp):
+			comp.in_num=comp.in_num+int(qhcomp)
+			f=file('num.txt','w')
+			f.write(qhcomp)
+			comp.in_date=date.today()
+			comp.save()
 
 
 def dump_totamount():
